@@ -4,8 +4,8 @@ import com.ceaver.bno.network.Response
 
 object BitnodesRepository {
 
-    fun loadLatestSnapshot(): Response<BitnodesSnapshot> {
-        val response = BitnodesApi.loadSnapshots()
+    fun lookupLatestSnapshot(): Response<BitnodesSnapshot> {
+        val response = BitnodesApi.lookupSnapshots()
         return if (response.isSuccessful())
             Response.success(response.result!!.results[0])
         else

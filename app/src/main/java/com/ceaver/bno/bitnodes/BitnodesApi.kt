@@ -12,7 +12,7 @@ object BitnodesApi {
         .addConverterFactory(GsonConverterFactory.create())
         .build().create(BitnodesService::class.java)
 
-    fun loadSnapshots(): Response<BitnodesSnapshots> = try {
+    fun lookupSnapshots(): Response<BitnodesSnapshots> = try {
         mapResponse(bitnodes.snapshots().execute())
     } catch (e: IOException) {
         Response.error(e.toString())

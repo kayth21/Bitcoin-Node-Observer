@@ -29,7 +29,7 @@ object Workers {
 
     class SnapshotWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
         override fun doWork(): Result {
-            val response = BitnodesRepository.loadLatestSnapshot()
+            val response = BitnodesRepository.lookupLatestSnapshot()
             return if (response.isSuccessful()) {
                 val bitnodesSnapshot = response.result!!
                 val snapshot = Snapshot(
