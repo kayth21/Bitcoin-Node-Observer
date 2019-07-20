@@ -23,7 +23,7 @@ class NodeInputViewModel : ViewModel() {
 
     fun onSaveClick(ip: String, port: Int) {
         status.postValue(NodeInputStatus.START_SAVE)
-        NodeRepository.saveNodeAsync(node.value!!.copy(ip = ip, port = port, status = NodeStatus.UNKNOWN), true) {
+        NodeRepository.saveNodeAsync(node.value!!.copy(ip = ip, port = port, nodeStatus = NodeStatus.UNKNOWN), true) {
             status.postValue(NodeInputStatus.END_SAVE)
         }
     }
@@ -32,5 +32,4 @@ class NodeInputViewModel : ViewModel() {
         START_SAVE,
         END_SAVE
     }
-
 }

@@ -1,5 +1,8 @@
 package com.ceaver.bno
 
 class WorkerEvents {
-    data class End(val error: String?)
+    class Start()
+    class SnapshotWorkerStart()
+    data class SnapshotWorkerEnd(val error: String?)
+    class End()
 }

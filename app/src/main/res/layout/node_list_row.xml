@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="46dp">
+        android:layout_height="47dp">
 
     <ImageView
             android:id="@+id/nodeListRowStatusImage"
@@ -16,7 +16,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-            android:id="@+id/nodeListRowSocketAddressLabel"
+            android:id="@+id/nodeListRowSocketAddressField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -27,22 +27,37 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-            android:id="@+id/nodeListRowInfoLabel"
+            android:id="@+id/nodeListRowBlockHeightField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="8dp"
             android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@+id/nodeListRowSocketAddressLabel"
-            app:layout_constraintTop_toBottomOf="@+id/nodeListRowSocketAddressLabel"/>
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/nodeListRowSocketAddressField"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-            android:id="@+id/nodeListRowRankingLabel"
+            android:id="@+id/nodeListRowLocationField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/nodeListRowSocketAddressField"
+            app:layout_constraintTop_toBottomOf="@+id/nodeListRowSocketAddressField"/>
+
+    <TextView
+            android:id="@+id/nodeListRowRankingField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@id/nodeListRowBlockHeightField"
+            app:layout_constraintTop_toBottomOf="@+id/nodeListRowBlockHeightField"/>
+
+    <TextView
+            android:id="@+id/nodeListRowOrganisationField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/nodeListRowLocationField"
+            app:layout_constraintTop_toBottomOf="@+id/nodeListRowLocationField"/>
 
 </android.support.constraint.ConstraintLayout>

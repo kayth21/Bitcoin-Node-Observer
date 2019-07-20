@@ -4,8 +4,8 @@
     <string name="loadingData">Loading data...</string>
     <string name="noInternetConnection">No internet connection available...</string>
     <string name="node">Node</string>
-    <string name="invalidPortNumber">Please enter valid port number</string>
-    <string name="invalidIpAddress">Please enter valid ip address</string>
+    <string name="invalidPortNumber">Invalid port number</string>
+    <string name="invalidIpAddress">Invalid ip address</string>
     <string name="ip_address">IP Address</string>
     <string name="port">Port</string>
     <string name="save">Save</string>
@@ -13,4 +13,5 @@
     <string name="ipAddressHint">123.123.123.123</string>
     <string name="NodeHeaderImageContentDescription">Node header image</string>
     <string name="NodeStatusImageContentDescription">Node Status Image</string>
+    <string name="reload">Reload</string>
 </resources>

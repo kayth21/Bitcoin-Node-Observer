@@ -8,9 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.ceaver.bno.R
-import com.ceaver.bno.WorkerEvents
 import com.ceaver.bno.extensions.asFormattedDateTime
 import kotlinx.android.synthetic.main.snapshot_fragment.*
 import org.greenrobot.eventbus.EventBus
@@ -55,8 +53,7 @@ class SnapshotFragment : Fragment() {
 
     @Suppress("UNUSED_PARAMETER")
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: WorkerEvents.End) {
+    fun onMessageEvent(event: SnapshotEvents.Update) {
         loadSnapshot()
     }
-
 }

@@ -11,10 +11,13 @@ interface NodeDao {
     fun loadNode(id: Long): Node
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
-    fun insertNode(node: Node)
+    fun insertNode(node: Node) : Long
 
     @Update
     fun updateNode(node: Node)
+
+    @Update
+    fun updateNodes(nodes: List<Node>)
 
     @Delete
     fun deleteNode(node: Node)

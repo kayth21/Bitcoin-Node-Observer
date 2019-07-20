@@ -30,41 +30,56 @@ object NodeRepository {
         }
     }
 
-    fun saveNode(node: Node) {
-        if (node.id > 0)
+    fun saveNode(node: Node): Long {
+        return if (node.id > 0)
             updateNode(node)
         else
             insertNode(node)
     }
 
-    fun saveNodeAsync(node: Node, callbackInMainThread: Boolean, callback: () -> Unit) {
+    fun saveNodeAsync(node: Node, callbackInMainThread: Boolean, callback: (Long) -> Unit) {
         if (node.id > 0)
             updateNodeAsync(node, callbackInMainThread, callback)
         else
             insertNodeAsync(node, callbackInMainThread, callback)
     }
 
-    fun insertNode(node: Node) {
-        getNodeDao().insertNode(node)
-        getEventbus().post(NodeEvents.Insert())
+    fun insertNode(node: Node, suppressEvents: Boolean = false): Long {
+        val nodeId = getNodeDao().insertNode(node)
+        getEventbus().post(NodeEvents.Insert(nodeId))
+        return nodeId
     }
 
-    fun insertNodeAsync(node: Node, callbackInMainThread: Boolean, callback: () -> Unit) {
+    fun insertNodeAsync(node: Node, callbackInMainThread: Boolean, callback: (Long) -> Unit) {
         BackgroundThreadExecutor.execute {
-            insertNode(node)
-            handleCallback(callbackInMainThread, callback)
+            val nodeId = insertNode(node)
+            handleCallback(callbackInMainThread, callback, nodeId)
         }
     }
 
-    fun updateNode(node: Node) {
+    fun updateNode(node: Node, suppressReload: Boolean = false): Long {
         getNodeDao().updateNode(node)
-        getEventbus().post(NodeEvents.Update())
+        getEventbus().post(NodeEvents.Update(node.id, suppressReload))
+        return node.id
     }
 
-    fun updateNodeAsync(node: Node, callbackInMainThread: Boolean, callback: () -> Unit) {
+    fun updateNodeAsync(node: Node, callbackInMainThread: Boolean, callback: (Long) -> Unit) {
         BackgroundThreadExecutor.execute {
             updateNode(node)
-            handleCallback(callbackInMainThread, callback)
+            handleCallback(callbackInMainThread, callback, node.id)
+        }
+    }
+
+    fun updateNodes(nodes: List<Node>, suppressReload: Boolean = false): List<Long> {
+        getNodeDao().updateNodes(nodes)
+        getEventbus().post(NodeEvents.Update(null, suppressReload))
+        return nodes.map { it.id }
+    }
+
+    fun updateNodesAsync(nodes: List<Node>, callbackInMainThread: Boolean, callback: (List<Long>) -> Unit) {
+        BackgroundThreadExecutor.execute {
+            val nodeIds = updateNodes(nodes)
+            handleCallback(callbackInMainThread, callback, nodeIds)
         }
     }
 
@@ -79,25 +94,11 @@ object NodeRepository {
         }
     }
 
-    private fun handleCallback(callbackInMainThread: Boolean, callback: (Node) -> Unit, node: Node) {
+    private fun <T> handleCallback(callbackInMainThread: Boolean, callback: (T) -> Unit, nodeId: T) {
         if (callbackInMainThread)
-            Handler(Looper.getMainLooper()).post { callback.invoke(node) }
+            Handler(Looper.getMainLooper()).post { callback.invoke(nodeId) }
         else
-            callback.invoke(node)
-    }
-
-    private fun handleCallback(callbackInMainThread: Boolean, callback: () -> Unit) {
-        if (callbackInMainThread)
-            Handler(Looper.getMainLooper()).post(callback)
-        else
-            callback.invoke()
-    }
-
-    private fun handleCallback(callbackInMainThread: Boolean, callback: (List<Node>) -> Unit, nodes: List<Node>) {
-        if (callbackInMainThread)
-            Handler(Looper.getMainLooper()).post { callback.invoke(nodes) }
-        else
-            callback.invoke(nodes)
+            callback.invoke(nodeId)
     }
 
     private fun getNodeDao(): NodeDao = getDatabase().nodeDao()

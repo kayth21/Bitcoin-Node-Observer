@@ -8,7 +8,10 @@ import com.ceaver.bno.MainActivity
 import com.ceaver.bno.R
 import com.ceaver.bno.WorkerEvents
 import com.ceaver.bno.Workers
-import com.ceaver.bno.network.isConnected
+import com.ceaver.bno.network.Network
+import com.ceaver.bno.system.SystemEvents
+import com.ceaver.bno.system.SystemRepository
+import com.ceaver.bno.threading.BackgroundThreadExecutor
 import kotlinx.android.synthetic.main.splash_activity.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -24,10 +27,17 @@ class SplashActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
-
         publishView()
-        bindActions()
-        loadSnapshotData()
+
+        if (SystemRepository.isInitialized()) {
+            BackgroundThreadExecutor.execute {
+                Thread.sleep(1000);
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        } else {
+            bindActions()
+            loadSnapshotData()
+        }
     }
 
     override fun onStop() {
@@ -46,7 +56,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun loadSnapshotData() {
-        if (isConnected()) {
+        if (Network.isConnected()) {
             splashActivityActionLabel.text = getString(R.string.loadingData)
             Workers.run()
         } else {
@@ -55,13 +65,19 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: WorkerEvents.End) {
-        if (event.error == null) {
-            startActivity(Intent(this, MainActivity::class.java))
-        } else {
-            splashActivityActionLabel.text = event.error
-            splashActivityRetryButton.visibility = View.VISIBLE
+    fun onMessageEvent(event: SystemEvents.Initialized) {
+        Thread.sleep(1000);
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: WorkerEvents.SnapshotWorkerEnd) {
+        if (event.error != null) {
+            splashActivityActionLabel.text = getString(R.string.loadingData)
+            Workers.run()
         }
     }
 }

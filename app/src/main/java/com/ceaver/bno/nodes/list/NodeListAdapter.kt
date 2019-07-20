@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.ceaver.bno.Application
-import com.ceaver.bno.R
-import com.ceaver.bno.extensions.resIdByName
+import com.ceaver.bno.extensions.setLocked
+import com.ceaver.bno.network.NetworkStatus
 import com.ceaver.bno.nodes.Node
 import kotlin.random.Random
 
@@ -24,7 +23,7 @@ internal class NodeListAdapter(private val onClickListener: NodeListFragment.OnI
     var currentLongClickNode: Node? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NodeViewHolder {
-        return NodeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.node_list_row, parent, false))
+        return NodeViewHolder(LayoutInflater.from(parent.context).inflate(com.ceaver.bno.R.layout.node_list_row, parent, false))
     }
 
     override fun getItemCount(): Int = nodeList.size
@@ -40,16 +39,15 @@ internal class NodeListAdapter(private val onClickListener: NodeListFragment.OnI
         }
 
         fun bindItem(node: Node, onClickListener: NodeListFragment.OnItemClickListener) {
-            (view.findViewById(R.id.nodeListRowStatusImage) as ImageView).setImageResource(getImageIdentifier(node))
-            (view.findViewById(R.id.nodeListRowSocketAddressLabel) as TextView).text = "${node.ip}:${node.port}"
-            (view.findViewById(R.id.nodeListRowInfoLabel) as TextView).text = "Comming soon..." // TODO
-            (view.findViewById(R.id.nodeListRowRankingLabel) as TextView).text = "Rank" // TODO
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowStatusImage) as ImageView).setImageResource(node.nodeStatus.image)
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowStatusImage) as ImageView).setLocked(node.networkStatus == NetworkStatus.LOADING || node.networkStatus == NetworkStatus.ERROR)
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowSocketAddressField) as TextView).text = "${node.ip}:${node.port}"
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowBlockHeightField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Height: ${node.height ?: "unknown"}" else ""
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowLocationField) as TextView).text = if (node.isLoading()) "" else node.errorMessage ?: "${node.city ?: "unknown city"} (${node.countryCode ?: "unknown country"})"
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowRankingField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Ranking: TODO" else ""// TODO
+
             view.setOnCreateContextMenuListener(this)
             itemView.setOnClickListener { onClickListener.onItemClick(node) }
-        }
-
-        private fun getImageIdentifier(node: Node): Int {
-            return Application.appContext!!.resIdByName(node.status.name.toLowerCase(), "drawable")
         }
     }
 }

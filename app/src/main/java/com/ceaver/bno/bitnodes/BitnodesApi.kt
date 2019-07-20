@@ -1,6 +1,7 @@
 package com.ceaver.bno.bitnodes
 
 import com.ceaver.bno.network.Response
+import com.google.gson.JsonParser
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
@@ -18,9 +19,19 @@ object BitnodesApi {
         Response.error(e.toString())
     }
 
-    private fun <T> mapResponse(response: retrofit2.Response<T>): Response<T> =
-        if (response.isSuccessful)
-            Response.success(response.body()!!)
-        else
-            Response.error(response.code().toString() + " " + response.message())
+    fun lookupNode(ip: String, port: Int): Response<BitnodesNode> = try {
+        mapResponse(bitnodes.node(ip, port).execute())
+    } catch (e: IOException) {
+        Response.error(e.toString())
+    }
 }
+
+private fun <T> mapResponse(response: retrofit2.Response<T>): Response<T> =
+    if (response.isSuccessful) {
+        Response.success(response.body()!!)
+    } else {
+        val errorCode = response.code().toString()
+        val errorJsonString = response.errorBody()?.string()
+        val errorText = errorJsonString.let { JsonParser().parse(it).asJsonObject["detail"]?.asString }
+        Response.exception("Error " + errorCode + ": " + (errorText ?: "failed loading detail error text"))
+    }

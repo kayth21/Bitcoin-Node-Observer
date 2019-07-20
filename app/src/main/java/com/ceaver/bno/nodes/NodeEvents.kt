@@ -1,7 +1,7 @@
 package com.ceaver.bno.nodes
 
 class NodeEvents {
-    class Update()
-    class Insert()
+    data class Update(val nodeId: Long? = null, val suppressReload: Boolean = false)
+    data class Insert(val nodeId: Long? = null, val suppressReload: Boolean = false)
     class Delete()
 }

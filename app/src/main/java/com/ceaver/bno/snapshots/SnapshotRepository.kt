@@ -2,6 +2,7 @@ package com.ceaver.bno.snapshots
 
 import android.content.Context
 import com.ceaver.bno.Application
+import org.greenrobot.eventbus.EventBus
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
@@ -18,6 +19,7 @@ object SnapshotRepository {
             .putInt(TOTAL_NODES, snapshot.totalNodes)
             .putLong(SNAPSHOT_DATE, ChronoUnit.SECONDS.between(LocalDateTime.MIN, snapshot.snapshotDate))
             .apply()
+        EventBus.getDefault().post(SnapshotEvents.Update())
     }
 
     fun load(): Snapshot {

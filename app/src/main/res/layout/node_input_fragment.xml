@@ -13,30 +13,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.6"/>
+            app:layout_constraintGuide_percent="0.68"/>
 
     <!-- TITLE -->
 
     <ImageView
             android:id="@+id/nodeInputFragmentNodeImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/node"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="3dp"
+            android:src="@drawable/bitcoin_logo"
             android:contentDescription="@string/NodeHeaderImageContentDescription"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
             android:id="@+id/nodeInputFragmentNodeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:text="@string/node"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/nodeInputFragmentNodeImageView"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="@+id/nodeInputFragmentNodeImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/nodeInputFragmentNodeImageView"/>
 
     <!-- IP ADDRESS -->
 
@@ -44,8 +46,8 @@
             android:id="@+id/nodeInputFragmentIpLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
             android:textSize="12sp"
             android:textStyle="bold"
             android:text="@string/ip_address"
@@ -59,7 +61,8 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:enabled="false"
-            android:inputType="text"
+            android:inputType="number"
+            android:digits="0123456789."
             android:textSize="12sp"
             android:importantForAutofill="no"
             android:hint="@string/ipAddressHint"
@@ -72,7 +75,7 @@
             android:id="@+id/nodeInputFragmentPortLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:textSize="12sp"
             android:textStyle="bold"
             android:text="@string/port"

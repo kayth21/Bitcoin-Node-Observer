@@ -4,11 +4,16 @@ import com.ceaver.bno.network.Response
 
 object BitnodesRepository {
 
+    @Suppress("UNCHECKED_CAST")
     fun lookupLatestSnapshot(): Response<BitnodesSnapshot> {
         val response = BitnodesApi.lookupSnapshots()
         return if (response.isSuccessful())
             Response.success(response.result!!.results[0])
         else
-            Response.error(response.error!!)
+            response as Response<BitnodesSnapshot>
+    }
+
+    fun lookupNode(ip: String, port: Int): Response<BitnodesNode> {
+        return BitnodesApi.lookupNode(ip, port)
     }
 }
