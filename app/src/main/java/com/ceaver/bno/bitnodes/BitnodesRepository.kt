@@ -14,6 +14,10 @@ object BitnodesRepository {
     }
 
     fun lookupNode(ip: String, port: Int): Response<BitnodesNode> {
-        return BitnodesApi.lookupNode(ip, port)
+        return BitnodesApi.lookupNodeDetails(ip, port)
+    }
+
+    fun lookupPeerIndex(ip: String, port: Int): Response<BitnodesPeerIndex> {
+        return BitnodesApi.lookupPeerIndex(ip, port)
     }
 }

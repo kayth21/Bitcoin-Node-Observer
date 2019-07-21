@@ -88,8 +88,9 @@ object Workers {
     class UpdateNodeWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
         override fun doWork(): Result {
             val node = NodeRepository.loadNode(inputData.getLong(NODE_WORKER_NODE_ID, -1))
-            val response = BitnodesRepository.lookupNode(node.ip, node.port)
-            NodeRepository.updateNode(node.copyFromBitnodesResponse(response), true)
+            val nodeInfoResponse = BitnodesRepository.lookupNode(node.ip, node.port)
+            val peerIndexResponse = BitnodesRepository.lookupPeerIndex(node.ip, node.port)
+            NodeRepository.updateNode(node.copyFromBitnodesResponse(nodeInfoResponse, peerIndexResponse), true)
             return Result.success()
         }
     }

@@ -44,7 +44,7 @@ internal class NodeListAdapter(private val onClickListener: NodeListFragment.OnI
             (view.findViewById(com.ceaver.bno.R.id.nodeListRowSocketAddressField) as TextView).text = "${node.ip}:${node.port}"
             (view.findViewById(com.ceaver.bno.R.id.nodeListRowBlockHeightField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Height: ${node.height ?: "unknown"}" else ""
             (view.findViewById(com.ceaver.bno.R.id.nodeListRowLocationField) as TextView).text = if (node.isLoading()) "" else node.errorMessage ?: "${node.city ?: "unknown city"} (${node.countryCode ?: "unknown country"})"
-            (view.findViewById(com.ceaver.bno.R.id.nodeListRowRankingField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Ranking: TODO" else ""// TODO
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowRankingField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Ranking: ${node.rank ?: "unknown"}" else ""
 
             view.setOnCreateContextMenuListener(this)
             itemView.setOnClickListener { onClickListener.onItemClick(node) }

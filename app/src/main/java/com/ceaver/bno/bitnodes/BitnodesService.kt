@@ -10,5 +10,9 @@ interface BitnodesService {
     fun snapshots(): Call<BitnodesSnapshots>
 
     @GET("/api/v1/nodes/{ip}-{port}")
-    fun node(@Path("ip") ip: String, @Path("port") port: Int): Call<BitnodesNode>
+    fun nodeDetails(@Path("ip") ip: String, @Path("port") port: Int): Call<BitnodesNode>
+
+    @GET("/api/v1/nodes/leaderboard/{ip}-{port}")
+    fun peerIndex(@Path("ip") ip: String, @Path("port") port: Int): Call<BitnodesPeerIndex>
+
 }

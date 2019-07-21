@@ -44,9 +44,9 @@ object NodeRepository {
             insertNodeAsync(node, callbackInMainThread, callback)
     }
 
-    fun insertNode(node: Node, suppressEvents: Boolean = false): Long {
+    fun insertNode(node: Node, suppressReload: Boolean = false): Long {
         val nodeId = getNodeDao().insertNode(node)
-        getEventbus().post(NodeEvents.Insert(nodeId))
+        getEventbus().post(NodeEvents.Insert(nodeId, suppressReload))
         return nodeId
     }
 

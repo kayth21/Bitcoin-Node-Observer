@@ -26,6 +26,6 @@ data class Response<T> private constructor(
 
     fun isError(): Boolean = error != null
 
-    fun failureText(): String = exception ?: error ?: ""
+    fun failureText(): String? = exception ?: error
 }
 
