@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.ceaver.bno.extensions.asFormattedNumber
 import com.ceaver.bno.extensions.setLocked
 import com.ceaver.bno.network.NetworkStatus
 import com.ceaver.bno.nodes.Node
@@ -42,9 +43,9 @@ internal class NodeListAdapter(private val onClickListener: NodeListFragment.OnI
             (view.findViewById(com.ceaver.bno.R.id.nodeListRowStatusImage) as ImageView).setImageResource(node.nodeStatus.image)
             (view.findViewById(com.ceaver.bno.R.id.nodeListRowStatusImage) as ImageView).setLocked(node.networkStatus == NetworkStatus.LOADING || node.networkStatus == NetworkStatus.ERROR)
             (view.findViewById(com.ceaver.bno.R.id.nodeListRowSocketAddressField) as TextView).text = "${node.ip}:${node.port}"
-            (view.findViewById(com.ceaver.bno.R.id.nodeListRowBlockHeightField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Height: ${node.height ?: "unknown"}" else ""
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowBlockHeightField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Height: ${node.height?.asFormattedNumber() ?: "unknown"}" else ""
             (view.findViewById(com.ceaver.bno.R.id.nodeListRowLocationField) as TextView).text = if (node.isLoading()) "" else node.errorMessage ?: "${node.city ?: "unknown city"} (${node.countryCode ?: "unknown country"})"
-            (view.findViewById(com.ceaver.bno.R.id.nodeListRowRankingField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Ranking: ${node.rank ?: "unknown"}" else ""
+            (view.findViewById(com.ceaver.bno.R.id.nodeListRowRankingField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Ranking: ${node.rank?.asFormattedNumber() ?: "unknown"}" else ""
 
             view.setOnCreateContextMenuListener(this)
             itemView.setOnClickListener { onClickListener.onItemClick(node) }

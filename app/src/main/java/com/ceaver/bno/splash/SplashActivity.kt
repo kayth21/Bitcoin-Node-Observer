@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.ceaver.bno.MainActivity
 import com.ceaver.bno.R
-import com.ceaver.bno.WorkerEvents
 import com.ceaver.bno.Workers
 import com.ceaver.bno.network.Network
-import com.ceaver.bno.system.SystemEvents
+import com.ceaver.bno.network.NetworkStatus
+import com.ceaver.bno.snapshots.SnapshotEvents
+import com.ceaver.bno.snapshots.SnapshotRepository
 import com.ceaver.bno.system.SystemRepository
 import com.ceaver.bno.threading.BackgroundThreadExecutor
 import kotlinx.android.synthetic.main.splash_activity.*
@@ -30,10 +31,7 @@ class SplashActivity : AppCompatActivity() {
         publishView()
 
         if (SystemRepository.isInitialized()) {
-            BackgroundThreadExecutor.execute {
-                Thread.sleep(1000);
-                startActivity(Intent(this, MainActivity::class.java))
-            }
+            BackgroundThreadExecutor.execute { startMainActivity() }
         } else {
             bindActions()
             loadSnapshotData()
@@ -51,7 +49,8 @@ class SplashActivity : AppCompatActivity() {
 
     private fun bindActions() {
         splashActivityRetryButton.setOnClickListener {
-            splashActivityRetryButton.visibility = View.INVISIBLE; loadSnapshotData()
+            hideRetryButton()
+            loadSnapshotData()
         }
     }
 
@@ -60,24 +59,34 @@ class SplashActivity : AppCompatActivity() {
             splashActivityActionLabel.text = getString(R.string.loadingData)
             Workers.run()
         } else {
-            splashActivityActionLabel.text = getString(R.string.noInternetConnection)
-            splashActivityRetryButton.visibility = View.VISIBLE
+            showRetryButton(getString(R.string.noInternetConnection))
         }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: SystemEvents.Initialized) {
+    private fun startMainActivity() {
         Thread.sleep(1000);
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     @Suppress("UNUSED_PARAMETER")
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: WorkerEvents.SnapshotWorkerEnd) {
-        if (event.error != null) {
-            splashActivityActionLabel.text = getString(R.string.loadingData)
-            Workers.run()
+    fun onMessageEvent(event: SnapshotEvents.Update) {
+        val snapshot = SnapshotRepository.load()
+        if (snapshot.networkStatus == NetworkStatus.NORMAL) {
+            startMainActivity()
+        } else if (snapshot.networkStatus == NetworkStatus.ERROR) {
+            showRetryButton(snapshot.errorMessage!!)
         }
+    }
+
+    private fun showRetryButton(errorMessage: String) {
+        splashActivityActionLabel.text = errorMessage
+        splashActivityRetryButton.visibility = View.VISIBLE
+    }
+
+    private fun hideRetryButton() {
+        splashActivityActionLabel.text = null
+        splashActivityRetryButton.visibility = View.INVISIBLE
     }
 }

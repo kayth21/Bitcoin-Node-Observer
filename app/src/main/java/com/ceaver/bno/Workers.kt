@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.work.*
 import com.ceaver.bno.bitnodes.BitnodesRepository
 import com.ceaver.bno.nodes.NodeRepository
-import com.ceaver.bno.snapshots.Snapshot
 import com.ceaver.bno.snapshots.SnapshotRepository
 import com.ceaver.bno.threading.BackgroundThreadExecutor
 import org.greenrobot.eventbus.EventBus
@@ -21,7 +20,7 @@ object Workers {
         BackgroundThreadExecutor.execute {
             WorkManager.getInstance()
                 .beginWith(notifyStart())
-                .then(prepareNodes(nodeId))
+                .then(listOf(prepareNodes(nodeId), prepareSnapshot()))
                 .then(updateNodes(nodeId) + updateSnapshot())
                 .then(notifyEnd())
                 .enqueue()
@@ -39,19 +38,13 @@ object Workers {
         }
     }
 
-    private fun updateSnapshot(): OneTimeWorkRequest {
-        return OneTimeWorkRequestBuilder<SnapshotWorker>().build()
+    private fun prepareSnapshot(): OneTimeWorkRequest {
+        return OneTimeWorkRequestBuilder<PrepareSnapshotWorker>().build()
     }
 
-    class SnapshotWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
+    class PrepareSnapshotWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
         override fun doWork(): Result {
-            EventBus.getDefault().post(WorkerEvents.SnapshotWorkerStart())
-            val response = BitnodesRepository.lookupLatestSnapshot()
-            if (response.isSuccessful()) {
-                val bitnodesSnapshot = response.result!!
-                SnapshotRepository.update(Snapshot(bitnodesSnapshot))
-            }
-            EventBus.getDefault().post(WorkerEvents.SnapshotWorkerEnd(response.error))
+            SnapshotRepository.update(SnapshotRepository.load().copyForReload())
             return Result.success()
         }
     }
@@ -73,6 +66,18 @@ object Workers {
             } else {
                 NodeRepository.updateNode(NodeRepository.loadNode(nodeId).copyForReload(), true)
             }
+            return Result.success()
+        }
+    }
+
+    private fun updateSnapshot(): OneTimeWorkRequest {
+        return OneTimeWorkRequestBuilder<SnapshotWorker>().build()
+    }
+
+    class SnapshotWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
+        override fun doWork(): Result {
+            val response = BitnodesRepository.lookupLatestSnapshot()
+            SnapshotRepository.update(SnapshotRepository.load().copyFromBitnodesResponse(response))
             return Result.success()
         }
     }

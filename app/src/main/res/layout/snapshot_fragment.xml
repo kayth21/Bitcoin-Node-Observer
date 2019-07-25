@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
-             android:layout_height="match_parent">
+             android:layout_height="match_parent" android:id="@+id/frameLayout">
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -12,33 +12,86 @@
             android:paddingEnd="8dp"
             android:paddingBottom="8dp">
 
+        <ImageView
+                android:id="@+id/snapshotFragmentBitnodesImage"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:srcCompat="@drawable/bitnodes_logo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/snapshotFragmentBlockHeightLabel"/>
+
         <TextView
                 android:id="@+id/snapshotFragmentTotalNodesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:layout_marginTop="32dp"
-                android:layout_marginStart="32dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:fontFamily="sans-serif-light"
+                android:text="Total Nodes:"
+                app:layout_constraintStart_toStartOf="@+id/snapshotFragmentBlockHeightLabel"
+                app:layout_constraintBottom_toTopOf="@+id/snapshotFragmentBlockHeightLabel"/>
 
         <TextView
                 android:id="@+id/snapshotFragmentBlockHeightLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/snapshotFragmentTotalNodesLabel"/>
+                android:fontFamily="sans-serif-light"
+                android:text="Latest Block:"
+                app:layout_constraintStart_toStartOf="@+id/snapshotFragmentSnapshotDateLabel"
+                app:layout_constraintTop_toTopOf="@+id/snapshotFragmentBitnodesImage"
+                app:layout_constraintBottom_toBottomOf="@+id/snapshotFragmentBitnodesImage"/>
 
+        <TextView
+                android:id="@+id/snapshotFragmentTotalNodesValue"
+                android:layout_width="wrap_content"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/snapshotFragmentBlockHeightValue"
+                app:layout_constraintEnd_toEndOf="@+id/snapshotFragmentBlockHeightValue"/>
+        <TextView
+                android:id="@+id/snapshotFragmentBlockHeightValue"
+                android:textAlignment="viewEnd"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                app:layout_constraintBottom_toTopOf="@+id/snapshotFragmentSnapshotDateValue"
+                app:layout_constraintEnd_toEndOf="@+id/snapshotFragmentSnapshotDateValue"/>
+
+        <TextView
+                android:id="@+id/snapshotFragmentSnapshotDateValue"
+                android:textAlignment="viewEnd"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/snapshotFragmentSnapshotDateLabel"/>
         <TextView
                 android:id="@+id/snapshotFragmentSnapshotDateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/snapshotFragmentTotalNodesLabel"
+                android:layout_marginEnd="16dp"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:text="Snapshot Date:"
+                app:layout_constraintTop_toBottomOf="@+id/snapshotFragmentBlockHeightLabel"
+                app:layout_constraintEnd_toStartOf="@+id/snapshotFragmentSnapshotDateValue"/>
+        <TextView
+                android:id="@+id/snapshotFragmentExceptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/snapshotFragmentSnapshotDateLabel"/>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -8,8 +8,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ceaver.bno.R
 import com.ceaver.bno.extensions.asFormattedDateTime
+import com.ceaver.bno.extensions.asFormattedNumber
+import com.ceaver.bno.extensions.setLocked
 import kotlinx.android.synthetic.main.snapshot_fragment.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -23,7 +24,7 @@ class SnapshotFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.snapshot_fragment, container, false)
+        return inflater.inflate(com.ceaver.bno.R.layout.snapshot_fragment, container, false)
     }
 
     override fun onStart() {
@@ -46,9 +47,11 @@ class SnapshotFragment : Fragment() {
     }
 
     private fun onSnapshotLoaded(snapshot: Snapshot) {
-        snapshotFragmentBlockHeightLabel.text = "Block height: ${snapshot.blockHeight}"
-        snapshotFragmentTotalNodesLabel.text = "Total nodes: ${snapshot.totalNodes}"
-        snapshotFragmentSnapshotDateLabel.text = "Snapshot date: ${snapshot.snapshotDate.asFormattedDateTime()}"
+        snapshotFragmentBitnodesImage.setLocked(!snapshot.isNetworkStatusNormal())
+        snapshotFragmentBlockHeightValue.text = snapshot.blockHeight!!.asFormattedNumber()
+        snapshotFragmentTotalNodesValue.text = snapshot.totalNodes!!.asFormattedNumber()
+        snapshotFragmentSnapshotDateValue.text = snapshot.snapshotDate!!.asFormattedDateTime()
+        snapshotFragmentExceptionLabel.text = snapshot.errorMessage ?: ""
     }
 
     @Suppress("UNUSED_PARAMETER")

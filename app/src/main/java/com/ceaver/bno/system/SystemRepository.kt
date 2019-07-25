@@ -2,7 +2,8 @@ package com.ceaver.bno.system
 
 import android.content.Context
 import com.ceaver.bno.Application
-import com.ceaver.bno.WorkerEvents
+import com.ceaver.bno.snapshots.SnapshotEvents
+import com.ceaver.bno.snapshots.SnapshotRepository
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -22,11 +23,10 @@ object SystemRepository {
 
     @Suppress("UNUSED_PARAMETER")
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: WorkerEvents.SnapshotWorkerEnd) {
-        if (!isInitialized() && event.error == null ) {
+    fun onMessageEvent(event: SnapshotEvents.Update) {
+        if (!isInitialized() && SnapshotRepository.load().isNetworkStatusNormal()) {
             Application.appContext!!.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE).edit().putBoolean(IS_INITIALIZED, true).apply()
             EventBus.getDefault().unregister(this)
-            EventBus.getDefault().post(SystemEvents.Initialized())
         }
     }
 }
