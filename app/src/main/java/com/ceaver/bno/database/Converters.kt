@@ -1,7 +1,7 @@
 package com.ceaver.bno.database
 
 import android.arch.persistence.room.TypeConverter
-import com.ceaver.bno.network.NetworkStatus
+import com.ceaver.bno.network.SyncStatus
 import com.ceaver.bno.nodes.NodeStatus
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
@@ -21,8 +21,8 @@ class Converters {
     fun toNodeStatus(string: String?): NodeStatus? = string?.let { NodeStatus.valueOf(it) }
 
     @TypeConverter
-    fun fromNetworkStatus(networkStatus: NetworkStatus?): String? = networkStatus?.name
+    fun fromSyncStatus(syncStatus: SyncStatus?): String? = syncStatus?.name
 
     @TypeConverter
-    fun toNetworkStatus(string: String?): NetworkStatus? = string?.let { NetworkStatus.valueOf(it) }
+    fun toSyncStatus(string: String?): SyncStatus? = string?.let { SyncStatus.valueOf(it) }
 }

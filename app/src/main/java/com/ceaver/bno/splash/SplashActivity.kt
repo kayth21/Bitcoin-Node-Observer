@@ -8,7 +8,7 @@ import com.ceaver.bno.MainActivity
 import com.ceaver.bno.R
 import com.ceaver.bno.Workers
 import com.ceaver.bno.network.Network
-import com.ceaver.bno.network.NetworkStatus
+import com.ceaver.bno.network.SyncStatus
 import com.ceaver.bno.snapshots.SnapshotEvents
 import com.ceaver.bno.snapshots.SnapshotRepository
 import com.ceaver.bno.system.SystemRepository
@@ -73,9 +73,9 @@ class SplashActivity : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: SnapshotEvents.Update) {
         val snapshot = SnapshotRepository.load()
-        if (snapshot.networkStatus == NetworkStatus.NORMAL) {
+        if (snapshot.lastSyncStatus == SyncStatus.NORMAL) {
             startMainActivity()
-        } else if (snapshot.networkStatus == NetworkStatus.ERROR) {
+        } else if (snapshot.lastSyncStatus == SyncStatus.ERROR) {
             showRetryButton(snapshot.errorMessage!!)
         }
     }

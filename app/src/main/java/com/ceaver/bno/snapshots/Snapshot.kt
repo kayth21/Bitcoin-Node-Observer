@@ -2,26 +2,27 @@ package com.ceaver.bno.snapshots
 
 import com.ceaver.bno.bitnodes.BitnodesSnapshot
 import com.ceaver.bno.extensions.asLocalDateTime
-import com.ceaver.bno.network.NetworkStatus
 import com.ceaver.bno.network.Response
+import com.ceaver.bno.network.SyncStatus
 import java.time.LocalDateTime
 
 data class Snapshot(
     val blockHeight: Int?,
     val totalNodes: Int?,
     val snapshotDate: LocalDateTime?,
-    val networkStatus: NetworkStatus,
+    val lastSyncStatus: SyncStatus? = null,
+    val lastSyncDate: LocalDateTime? = null,
     val errorMessage: String? = null
 ) {
     fun copyForReload(): Snapshot {
         return copy(
-            networkStatus = NetworkStatus.LOADING,
+            lastSyncStatus = SyncStatus.LOADING,
             errorMessage = null
         )
     }
 
     fun isNetworkStatusNormal(): Boolean {
-        return networkStatus == NetworkStatus.NORMAL
+        return lastSyncStatus == SyncStatus.NORMAL
     }
 
     fun copyFromBitnodesResponse(response: Response<BitnodesSnapshot>): Snapshot {
@@ -31,12 +32,14 @@ data class Snapshot(
                 blockHeight = result.blockHeight,
                 totalNodes = result.totalNodes,
                 snapshotDate = result.timestamp.asLocalDateTime(),
-                networkStatus = NetworkStatus.NORMAL,
+                lastSyncStatus = SyncStatus.NORMAL,
+                lastSyncDate = LocalDateTime.now(),
                 errorMessage = null
             )
         } else
             copy(
-                networkStatus = if (response.isError()) NetworkStatus.ERROR else NetworkStatus.NORMAL,
+                lastSyncStatus = if (response.isError()) SyncStatus.ERROR else SyncStatus.NORMAL,
+                lastSyncDate = LocalDateTime.now(),
                 errorMessage = response.failureText()
             )
     }

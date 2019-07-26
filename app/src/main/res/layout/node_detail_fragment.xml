@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="32dp">
+
+        <!-- TITEL -->
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/nodeDetailFragmentTitleConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:id="@+id/nodeDetailFragmentNodeImage"
+                    android:contentDescription="@string/NodeHeaderImageContentDescription"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/bitcoin_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                    android:id="@+id/nodeDetailFragmentTitle"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/bitcoinNode"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/nodeDetailFragmentNodeImage"
+                    app:layout_constraintTop_toTopOf="@id/nodeDetailFragmentNodeImage"/>
+            <TextView
+                    android:id="@+id/nodeDetailFragmentSocketAddressValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentTitle"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <!-- LAST SYNCHRONISATION -->
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/nodeDetailFragmentSynchronisationConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <android.support.constraint.Guideline
+                    android:id="@+id/nodeDetailFragmentSynchronisationGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.55"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLastSynchronisationTitle"
+                    android:text="@string/last_synchronisation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                    android:layout_width="200dp"
+                    android:layout_height="1dp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentLastSynchronisationTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="#D5D5D5"/>
+
+            <!-- LAST SYNC DATE -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLastSyncDateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/date"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentLastSynchronisationTitle"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLastSyncDateValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentLastSyncDateLabel"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentLastSyncDateLabel"/>
+
+            <!-- SYNC STATUS -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLastSyncStatusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/status"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentLastSyncDateLabel"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentSynchronisationGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLastSyncStatusValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentLastSyncDateValue"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentLastSyncStatusLabel"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- EXCEPTION TEXT -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentErrorTextLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/message"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentLastSyncDateValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentErrorTextValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentErrorTextLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/nodeDetailFragmentNodeDetailsConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <android.support.constraint.Guideline
+                    android:id="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.55"/>
+
+            <!-- NODE DETAILS -->
+
+            <TextView
+                    android:text="@string/node_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nodeDetailFragmentNodeDetailsTitle"
+                    android:textStyle="bold"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                    android:layout_width="200dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentNodeDetailsTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="#D5D5D5"/>
+
+            <!-- NODE STATUS -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentNodeStatusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:text="@string/node_status"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentNodeDetailsTitle"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentNodeStatusValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentNodeStatusLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- BLOCK HEIGHT -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentBlockHeightLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/block_height"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentNodeStatusLabel"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentBlockHeightValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentNodeStatusValue"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- PROTOCOL VERSION -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentProtocolVersionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/protocol_version"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentNodeStatusValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentProtocolVersionValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentProtocolVersionLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <!-- USER AGENT -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentUserAgentLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/user_agent"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentProtocolVersionLabel"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentUserAgentValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentProtocolVersionValue"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- CONNECTED SINCE -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentConnectedSinceLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/connected_since"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentProtocolVersionValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentConnectedSinceValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentConnectedSinceLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- ASN -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAsnLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/asn"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentConnectedSinceLabel"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAsnValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentConnectedSinceValue"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- CITY -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentCityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/city"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentConnectedSinceValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentCityValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentCityLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- COUNTRY CODE -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentCountryCodeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/country_code"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentCityLabel"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentCountryCodeValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentCityValue"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- TIMEZONE -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentTimezoneLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/timezone"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentCityValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentTimezoneValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentTimezoneLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- LATITUDE / ALTITUDE -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLatLongLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/latitude_longitude"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentTimezoneLabel"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLatLongValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
+                    app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentTimezoneValue"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- ORGANISATION NAME -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentOrganisationNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/organisation_name"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentTimezoneValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentOrganisationNameValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentOrganisationNameLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- HOSTNAME -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentHostnameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/hostname"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentOrganisationNameValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentHostnameValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentHostnameLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- SERVICES -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentServicesLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/services"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentHostnameValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentServicesValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentServicesLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/nodeDetailFragmentPeerIndexConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <android.support.constraint.Guideline
+                    android:id="@+id/nodeDetailFragmentPeerIndexGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.55"/>
+
+            <!-- LEADERBOARD TITLE -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentLeaderboardTitle"
+                    android:text="@string/leaderboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                    android:layout_width="200dp"
+                    android:layout_height="1dp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentLeaderboardTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="#D5D5D5"/>
+
+            <!-- PEER INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentPeerIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/overall_peer_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentLeaderboardTitle"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentPeerIndexValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentPeerIndexLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- RANK -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentRankLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/peer_index_rank"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentLeaderboardTitle"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentPeerIndexGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentRankValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentRankLabel"
+                    app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentRankLabel"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- PROTOCOL VERSION INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentProtocolVersionIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/protocol_version_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentPeerIndexValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentProtocolVersionIndexValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentProtocolVersionIndexLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- SERVICES INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentServicesIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/services_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentRankValue"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentServicesIndexValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentServicesIndexLabel"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- HEIGHT INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentHeightIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/height_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentProtocolVersionIndexValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentHeightIndexValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentHeightIndexLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- ASN INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAsnIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/asn_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentServicesIndexValue"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAsnIndexValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAsnIndexLabel"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- PORT INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentPortIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/port_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentHeightIndexValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentPortIndexValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentPortIndexLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- NETWORK SPEED INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentNetworkSpeedIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/network_speed_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentAsnIndexValue"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentNetworkSpeedIndexValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentNetworkSpeedIndexLabel"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- AVERAGE DAILY LATENCY INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAverageDailyLatencyIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/daily_latency_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentPortIndexValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAverageDailyLatencyIndexValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAverageDailyLatencyIndexLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- DAILY UPTIME INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentDailyUptimeIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/daily_uptime_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentNetworkSpeedIndexValue"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentDailyUptimeIndexValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentDailyUptimeIndexLabel"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- AVERAGE WEEKLY LATENCY INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAverageWeeklyLatencyIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/weekly_latency_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentAverageDailyLatencyIndexValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAverageWeeklyLatencyIndexValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAverageWeeklyLatencyIndexLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- WEEKLY UPTIME INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentWeeklyUptimeIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/weekly_uptime_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentDailyUptimeIndexValue"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentWeeklyUptimeIndexValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentWeeklyUptimeIndexLabel"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- AVERAGE MONTHLY LATENCY INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAverageMonthlyLatencyIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/monthly_latency_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentAverageWeeklyLatencyIndexValue"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentAverageMonthlyLatencyIndexValue"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAverageMonthlyLatencyIndexLabel"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- MONTHLY UPTIME INDEX -->
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentMonthlyUptimeIndexLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="@string/monthly_uptime_index"
+                    app:layout_constraintTop_toBottomOf="@id/nodeDetailFragmentWeeklyUptimeIndexValue"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"/>
+
+            <TextView
+                    android:id="@+id/nodeDetailFragmentMonthlyUptimeIndexValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentMonthlyUptimeIndexLabel"
+                    app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+
+</ScrollView>

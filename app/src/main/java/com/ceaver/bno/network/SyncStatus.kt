@@ -1,5 +1,5 @@
 package com.ceaver.bno.network
 
-enum class NetworkStatus {
+enum class SyncStatus {
     NORMAL, LOADING, ERROR
 }

@@ -6,8 +6,8 @@ import android.arch.persistence.room.PrimaryKey
 import com.ceaver.bno.bitnodes.BitnodesNode
 import com.ceaver.bno.bitnodes.BitnodesPeerIndex
 import com.ceaver.bno.extensions.asLocalDateTime
-import com.ceaver.bno.network.NetworkStatus
 import com.ceaver.bno.network.Response
+import com.ceaver.bno.network.SyncStatus
 import java.time.LocalDateTime
 
 @Entity(tableName = "node")
@@ -15,14 +15,15 @@ data class Node(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @ColumnInfo(name = "ip") val ip: String,
     @ColumnInfo(name = "port") val port: Int,
-    @ColumnInfo(name = "nodeStatus") val nodeStatus: NodeStatus = NodeStatus.UNKNOWN,
-    @ColumnInfo(name = "networkStatus") val networkStatus: NetworkStatus = NetworkStatus.NORMAL,
+    @ColumnInfo(name = "nodeStatus") val nodeStatus: NodeStatus? = null,
+    @ColumnInfo(name = "lastSyncStatus") val lastSyncStatus: SyncStatus? = null,
+    @ColumnInfo(name = "lastSyncDate") val lastSyncDate: LocalDateTime? = null,
     @ColumnInfo(name = "errorMessage") val errorMessage: String? = null,
     // node details
     @ColumnInfo(name = "protocolVersion") val protocolVersion: String? = null,
     @ColumnInfo(name = "userAgent") val userAgent: String? = null,
     @ColumnInfo(name = "connectedSince") val connectedSince: LocalDateTime? = null,
-    @ColumnInfo(name = "services") val services: String? = null,
+    @ColumnInfo(name = "services") val services: Int? = null,
     @ColumnInfo(name = "height") val height: Int? = null,
     @ColumnInfo(name = "hostname") val hostname: String? = null,
     @ColumnInfo(name = "city") val city: String? = null,
@@ -34,30 +35,31 @@ data class Node(
     @ColumnInfo(name = "organizationName") val organizationName: String? = null,
     // peer index
     @ColumnInfo(name = "rank") val rank: Int? = null,
-    @ColumnInfo(name = "peerIndex") val peerIndex: Double? = null,
-    @ColumnInfo(name = "vi") val vi: Double? = null,
-    @ColumnInfo(name = "si") val si: Double? = null,
-    @ColumnInfo(name = "hi") val hi: Double? = null,
-    @ColumnInfo(name = "ai") val ai: Double? = null,
-    @ColumnInfo(name = "pi") val pi: Double? = null,
-    @ColumnInfo(name = "dli") val dli: Double? = null,
-    @ColumnInfo(name = "dui") val dui: Double? = null,
-    @ColumnInfo(name = "wli") val wli: Double? = null,
-    @ColumnInfo(name = "wui") val wui: Double? = null,
-    @ColumnInfo(name = "mli") val mli: Double? = null,
-    @ColumnInfo(name = "mui") val mui: Double? = null,
-    @ColumnInfo(name = "nsi") val nsi: Double? = null,
-    @ColumnInfo(name = "ni") val ni: Double? = null,
-    @ColumnInfo(name = "bi") val bi: Double? = null
+    @ColumnInfo(name = "peerIndex") val peerIndex: String? = null,
+    @ColumnInfo(name = "protocolVersionIndex") val protocolVersionIndex: String? = null,
+    @ColumnInfo(name = "servicesIndex") val servicesIndex: String? = null,
+    @ColumnInfo(name = "heightIndex") val heightIndex: String? = null,
+    @ColumnInfo(name = "asnIndex") val asnIndex: String? = null,
+    @ColumnInfo(name = "portIndex") val portIndex: String? = null,
+    @ColumnInfo(name = "averageDailyLatencyIndex") val averageDailyLatencyIndex: String? = null,
+    @ColumnInfo(name = "dailyUptimeIndex") val dailyUptimeIndex: String? = null,
+    @ColumnInfo(name = "averageWeeklyLatencyIndex") val averageWeeklyLatencyIndex: String? = null,
+    @ColumnInfo(name = "weeklyUptimeIndex") val weeklyUptimeIndex: String? = null,
+    @ColumnInfo(name = "averageMonthlyLatencyIndex") val averageMonthlyLatencyIndex: String? = null,
+    @ColumnInfo(name = "monthlyUptimeIndex") val monthlyUptimeIndex: String? = null,
+    @ColumnInfo(name = "networkSpeedIndex") val networkSpeedIndex: String? = null,
+    @ColumnInfo(name = "nodesIndex") val nodesIndex: String? = null,
+    @ColumnInfo(name = "blockIndex") val blockIndex: String? = null
 ) {
 
     fun isLoading(): Boolean {
-        return networkStatus == NetworkStatus.LOADING
+        return lastSyncStatus == SyncStatus.LOADING
     }
 
     fun copyForReload(): Node {
         return copy(
-            networkStatus = NetworkStatus.LOADING,
+            lastSyncStatus = SyncStatus.LOADING,
+            lastSyncDate = LocalDateTime.now(),
             errorMessage = null
         )
     }
@@ -67,14 +69,15 @@ data class Node(
             val bitnodesNode = nodeInfoResponse.result!!
             val bitnodesPeerIndex = peerIndexResponse.result!!
             copy(
-                networkStatus = NetworkStatus.NORMAL,
+                lastSyncStatus = SyncStatus.NORMAL,
+                lastSyncDate = LocalDateTime.now(),
                 nodeStatus = NodeStatus.valueOf(bitnodesNode.status),
                 errorMessage = null,
                 // node infos
                 protocolVersion = bitnodesNode.data[0],
                 userAgent = bitnodesNode.data[1],
                 connectedSince = bitnodesNode.data[2].toInt().asLocalDateTime(),
-                services = bitnodesNode.data[3],
+                services = bitnodesNode.data[3].toInt(),
                 height = bitnodesNode.data[4].toInt(),
                 hostname = bitnodesNode.data[5],
                 city = bitnodesNode.data[6],
@@ -87,24 +90,25 @@ data class Node(
                 // peer index
                 rank = bitnodesPeerIndex.rank,
                 peerIndex = bitnodesPeerIndex.peerIndex,
-                vi = bitnodesPeerIndex.vi,
-                si = bitnodesPeerIndex.si,
-                hi = bitnodesPeerIndex.hi,
-                ai = bitnodesPeerIndex.ai,
-                pi = bitnodesPeerIndex.pi,
-                dli = bitnodesPeerIndex.dli,
-                dui = bitnodesPeerIndex.dui,
-                wli = bitnodesPeerIndex.wli,
-                wui = bitnodesPeerIndex.wui,
-                mli = bitnodesPeerIndex.mli,
-                mui = bitnodesPeerIndex.mui,
-                nsi = bitnodesPeerIndex.nsi,
-                ni = bitnodesPeerIndex.ni,
-                bi = bitnodesPeerIndex.bi
+                protocolVersionIndex = bitnodesPeerIndex.protocolVersionIndex,
+                servicesIndex = bitnodesPeerIndex.servicesIndex,
+                heightIndex = bitnodesPeerIndex.heightIndex,
+                asnIndex = bitnodesPeerIndex.asnIndex,
+                portIndex = bitnodesPeerIndex.portIndex,
+                averageDailyLatencyIndex = bitnodesPeerIndex.averageDailyLatencyIndex,
+                dailyUptimeIndex = bitnodesPeerIndex.dailyUptimeIndex,
+                averageWeeklyLatencyIndex = bitnodesPeerIndex.averageWeeklyLatencyIndex,
+                weeklyUptimeIndex = bitnodesPeerIndex.weeklyUptimeIndex,
+                averageMonthlyLatencyIndex = bitnodesPeerIndex.averageMonthlyLatencyIndex,
+                monthlyUptimeIndex = bitnodesPeerIndex.monthlyUptimeIndex,
+                networkSpeedIndex = bitnodesPeerIndex.networkSpeedIndex,
+                nodesIndex = bitnodesPeerIndex.nodesIndex,
+                blockIndex = bitnodesPeerIndex.blockIndex
             )
         } else {
             copy(
-                networkStatus = if (nodeInfoResponse.isError() || peerIndexResponse.isError()) NetworkStatus.ERROR else NetworkStatus.NORMAL,
+                lastSyncStatus = if (nodeInfoResponse.isError() || peerIndexResponse.isError()) SyncStatus.ERROR else SyncStatus.NORMAL,
+                lastSyncDate = LocalDateTime.now(),
                 nodeStatus = if (nodeInfoResponse.isException() || peerIndexResponse.isException()) NodeStatus.EXCEPTION else nodeStatus,
                 errorMessage = nodeInfoResponse.failureText() ?: peerIndexResponse.failureText()
             )

@@ -6,32 +6,32 @@ data class BitnodesPeerIndex(
     @SerializedName("rank")
     val rank: Int,
     @SerializedName("peer_index")
-    val peerIndex: Double,
+    val peerIndex: String,
     @SerializedName("vi")
-    val vi: Double,
+    val protocolVersionIndex: String,
     @SerializedName("si")
-    val si: Double,
+    val servicesIndex: String,
     @SerializedName("hi")
-    val hi: Double,
+    val heightIndex: String,
     @SerializedName("ai")
-    val ai: Double,
+    val asnIndex: String,
     @SerializedName("pi")
-    val pi: Double,
+    val portIndex: String,
     @SerializedName("dli")
-    val dli: Double,
+    val averageDailyLatencyIndex: String,
     @SerializedName("dui")
-    val dui: Double,
+    val dailyUptimeIndex: String,
     @SerializedName("wli")
-    val wli: Double,
+    val averageWeeklyLatencyIndex: String,
     @SerializedName("wui")
-    val wui: Double,
+    val weeklyUptimeIndex: String,
     @SerializedName("mli")
-    val mli: Double,
+    val averageMonthlyLatencyIndex: String,
     @SerializedName("mui")
-    val mui: Double,
+    val monthlyUptimeIndex: String,
     @SerializedName("nsi")
-    val nsi: Double,
+    val networkSpeedIndex: String,
     @SerializedName("ni")
-    val ni: Double,
+    val nodesIndex: String,
     @SerializedName("bi")
-    val bi: Double)
+    val blockIndex: String)
