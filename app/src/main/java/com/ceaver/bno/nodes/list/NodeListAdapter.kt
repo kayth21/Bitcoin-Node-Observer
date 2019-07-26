@@ -45,13 +45,17 @@ internal class NodeListAdapter(private val onClickListener: NodeListFragment.OnI
         fun bindItem(node: Node, onClickListener: NodeListFragment.OnItemClickListener) {
             (view.findViewById(R.id.nodeListRowStatusImage) as ImageView).setImageResource(if (node.nodeStatus == null) R.drawable.node_status_unknown else node.nodeStatus.image)
             (view.findViewById(R.id.nodeListRowStatusImage) as ImageView).setLocked(node.lastSyncStatus == SyncStatus.LOADING || node.lastSyncStatus == SyncStatus.ERROR)
-            (view.findViewById(R.id.nodeListRowSocketAddressField) as TextView).text = "${node.ip}:${node.port}"
+            (view.findViewById(R.id.nodeListRowSocketAddressField) as TextView).text = "${shortenIpAddress(node.ip)}:${node.port}"
             (view.findViewById(R.id.nodeListRowBlockHeightField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Height: ${node.height?.asFormattedNumber() ?: "unknown"}" else ""
             (view.findViewById(R.id.nodeListRowLocationField) as TextView).text = if (node.isLoading()) "" else node.errorMessage ?: "${node.city ?: "unknown city"} (${node.countryCode ?: "unknown country"})"
             (view.findViewById(R.id.nodeListRowRankingField) as TextView).text = if (node.isLoading()) "" else if (node.errorMessage == null) "Ranking: ${node.rank?.asFormattedNumber() ?: "unknown"}" else ""
 
             view.setOnCreateContextMenuListener(this)
             itemView.setOnClickListener { onClickListener.onItemClick(node) }
+        }
+
+        private fun shortenIpAddress(ip: String): String {
+            return if(ip.length > 16) ip.take(16) + "..." else ip
         }
     }
 }

@@ -10,7 +10,7 @@
     <string name="port">Port</string>
     <string name="save">Save</string>
     <string name="portHint">8333</string>
-    <string name="ipAddressHint">123.123.123.123</string>
+    <string name="ipAddressHint">192.168.1.1 or fe80::200:5aee:feaa:20a2</string>
     <string name="NodeHeaderImageContentDescription">Node header image</string>
     <string name="NodeStatusImageContentDescription">Node Status Image</string>
     <string name="reload">Reload</string>
