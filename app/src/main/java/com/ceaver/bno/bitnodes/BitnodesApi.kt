@@ -22,15 +22,19 @@ object BitnodesApi {
     }
 
     fun lookupNodeDetails(host: String, port: Int): Response<BitnodesNode> = try {
-        mapResponse(bitnodes.nodeDetails(InetAddress.getByName(host).hostAddress, port).execute())
+        mapResponse(bitnodes.nodeDetails(lookupHost(host), port).execute())
     } catch (e: IOException) {
         Response.error(e.toString())
     }
 
     fun lookupPeerIndex(host: String, port: Int): Response<BitnodesPeerIndex> = try {
-        mapResponse(bitnodes.peerIndex(InetAddress.getByName(host).hostAddress, port).execute())
+        mapResponse(bitnodes.peerIndex(lookupHost(host), port).execute())
     } catch (e: IOException) {
         Response.error(e.toString())
+    }
+
+    private fun lookupHost(host: String): String {
+        return if (host.endsWith(".onion", true)) host else InetAddress.getByName(host).hostAddress
     }
 }
 
