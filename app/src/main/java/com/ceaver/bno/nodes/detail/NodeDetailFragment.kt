@@ -51,7 +51,7 @@ class NodeDetailFragment : DialogFragment() {
     private fun lookupViewModel(): NodeDetailViewModel = ViewModelProviders.of(this).get(NodeDetailViewModel::class.java)
 
     private fun onNodeLoaded(node: Node) {
-        nodeDetailFragmentSocketAddressValue.text = "${node.ip}:${node.port}"
+        nodeDetailFragmentSocketAddressValue.text = "${node.host}:${node.port}"
         // sync data
         nodeDetailFragmentLastSyncStatusValue.text = node.lastSyncStatus?.name
         nodeDetailFragmentLastSyncDateValue.text = node.lastSyncDate?.asFormattedDateTime()

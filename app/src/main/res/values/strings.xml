@@ -5,12 +5,12 @@
     <string name="noInternetConnection">No internet connection available...</string>
     <string name="bitcoinNode">Bitcoin Node</string>
     <string name="invalidPortNumber">Invalid port number</string>
-    <string name="invalidIpAddress">Invalid ip address</string>
-    <string name="ip_address">IP Address</string>
+    <string name="invalidHost">Invalid host</string>
+    <string name="host">IP Address / Dynamic DNS URL</string>
     <string name="port">Port</string>
     <string name="save">Save</string>
     <string name="portHint">8333</string>
-    <string name="ipAddressHint">192.168.1.1 or fe80::200:5aee:feaa:20a2</string>
+    <string name="ipAddressHint">1.2.3.4 / fe80::200:::20a2 / abc.dyndns.com</string>
     <string name="NodeHeaderImageContentDescription">Node header image</string>
     <string name="NodeStatusImageContentDescription">Node Status Image</string>
     <string name="reload">Reload</string>

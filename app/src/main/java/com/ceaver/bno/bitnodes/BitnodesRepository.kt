@@ -13,11 +13,11 @@ object BitnodesRepository {
             response as Response<BitnodesSnapshot>
     }
 
-    fun lookupNode(ip: String, port: Int): Response<BitnodesNode> {
-        return BitnodesApi.lookupNodeDetails(ip, port)
+    fun lookupNode(host: String, port: Int): Response<BitnodesNode> {
+        return BitnodesApi.lookupNodeDetails(host, port)
     }
 
-    fun lookupPeerIndex(ip: String, port: Int): Response<BitnodesPeerIndex> {
-        return BitnodesApi.lookupPeerIndex(ip, port)
+    fun lookupPeerIndex(host: String, port: Int): Response<BitnodesPeerIndex> {
+        return BitnodesApi.lookupPeerIndex(host, port)
     }
 }

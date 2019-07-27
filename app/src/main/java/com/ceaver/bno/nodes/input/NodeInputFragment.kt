@@ -43,7 +43,7 @@ class NodeInputFragment : DialogFragment() {
     }
 
     private fun onSaveClick(viewModel: NodeInputViewModel) {
-        val ip = nodeInputFragmentIpField.text.toString()
+        val ip = nodeInputFragmentHostField.text.toString()
         val port = nodeInputFragmentPortField.text.toString().toInt()
         viewModel.onSaveClick(ip, port)
     }
@@ -59,7 +59,7 @@ class NodeInputFragment : DialogFragment() {
 
     private fun observeDataReady(viewModel: NodeInputViewModel) {
         viewModel.node.observe(this, Observer {
-            nodeInputFragmentIpField.setText(it!!.ip)
+            nodeInputFragmentHostField.setText(it!!.host)
             nodeInputFragmentPortField.setText(it.port.toString())
 
             registerInputValidation()
@@ -80,19 +80,20 @@ class NodeInputFragment : DialogFragment() {
     private fun registerInputValidation() {
         val ipV4Regex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\$"
         val ipV6Regex = "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))\$"
-        nodeInputFragmentIpField.registerInputValidator({ it.matches("$ipV4Regex|$ipV6Regex".toRegex()) }, getString(R.string.invalidIpAddress))
-        nodeInputFragmentIpField.afterTextChanged { nodeInputFragmentSaveButton.isEnabled = checkSaveButton() }
+        val dynDnsUrlRegex = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])\$"
+        nodeInputFragmentHostField.registerInputValidator({ it.matches("$ipV4Regex|$ipV6Regex|$dynDnsUrlRegex".toRegex()) }, getString(R.string.invalidHost))
+        nodeInputFragmentHostField.afterTextChanged { nodeInputFragmentSaveButton.isEnabled = checkSaveButton() }
         nodeInputFragmentPortField.registerInputValidator({ it.isNotEmpty() && it.toInt() in 0..65535 }, getString(R.string.invalidPortNumber))
         nodeInputFragmentPortField.afterTextChanged { nodeInputFragmentSaveButton.isEnabled = checkSaveButton() }
     }
 
     private fun enableInput(enable: Boolean) {
         nodeInputFragmentSaveButton.isEnabled = enable && checkSaveButton()
-        nodeInputFragmentIpField.isEnabled = enable
+        nodeInputFragmentHostField.isEnabled = enable
         nodeInputFragmentPortField.isEnabled = enable
     }
 
     private fun checkSaveButton(): Boolean {
-        return nodeInputFragmentIpField.error == null && nodeInputFragmentPortField.error == null
+        return nodeInputFragmentHostField.error == null && nodeInputFragmentPortField.error == null
     }
 }

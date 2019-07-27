@@ -6,6 +6,7 @@ import com.google.gson.JsonParser
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
+import java.net.InetAddress
 
 object BitnodesApi {
 
@@ -20,14 +21,14 @@ object BitnodesApi {
         Response.error(e.toString())
     }
 
-    fun lookupNodeDetails(ip: String, port: Int): Response<BitnodesNode> = try {
-        mapResponse(bitnodes.nodeDetails(ip, port).execute())
+    fun lookupNodeDetails(host: String, port: Int): Response<BitnodesNode> = try {
+        mapResponse(bitnodes.nodeDetails(InetAddress.getByName(host).hostAddress, port).execute())
     } catch (e: IOException) {
         Response.error(e.toString())
     }
 
-    fun lookupPeerIndex(ip: String, port: Int): Response<BitnodesPeerIndex> = try {
-        mapResponse(bitnodes.peerIndex(ip, port).execute())
+    fun lookupPeerIndex(host: String, port: Int): Response<BitnodesPeerIndex> = try {
+        mapResponse(bitnodes.peerIndex(InetAddress.getByName(host).hostAddress, port).execute())
     } catch (e: IOException) {
         Response.error(e.toString())
     }

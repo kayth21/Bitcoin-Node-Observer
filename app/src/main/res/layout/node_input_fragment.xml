@@ -34,19 +34,19 @@
     <!-- IP ADDRESS -->
 
     <TextView
-            android:id="@+id/nodeInputFragmentIpLabel"
+            android:id="@+id/nodeInputFragmentHostLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginStart="4dp"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:text="@string/ip_address"
+            android:text="@string/host"
             app:layout_constraintTop_toBottomOf="@id/nodeInputFragmentNodeImageView"
             app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-            android:id="@+id/nodeInputFragmentIpField"
+            android:id="@+id/nodeInputFragmentHostField"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -55,7 +55,7 @@
             android:importantForAutofill="no"
             android:hint="@string/ipAddressHint"
             android:inputType="text"
-            app:layout_constraintTop_toBottomOf="@+id/nodeInputFragmentIpLabel"
+            app:layout_constraintTop_toBottomOf="@+id/nodeInputFragmentHostLabel"
             app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- PORT NUMBER -->
@@ -68,7 +68,7 @@
             android:textStyle="bold"
             android:text="@string/port"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/nodeInputFragmentIpField"
+            app:layout_constraintTop_toBottomOf="@+id/nodeInputFragmentHostField"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="4dp"/>
 
     <EditText
@@ -91,9 +91,11 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:textStyle="bold"
             android:text="@string/save"
-            app:layout_constraintEnd_toEndOf="@+id/nodeInputFragmentIpField"
-            app:layout_constraintTop_toTopOf="@+id/nodeInputFragmentPortLabel" app:layout_constraintStart_toEndOf="@+id/nodeInputFragmentPortField" android:layout_marginStart="8dp"/>
+            app:layout_constraintEnd_toEndOf="@+id/nodeInputFragmentHostField"
+            app:layout_constraintTop_toTopOf="@+id/nodeInputFragmentPortLabel"
+            app:layout_constraintStart_toEndOf="@+id/nodeInputFragmentPortField"/>
 
 </android.support.constraint.ConstraintLayout>

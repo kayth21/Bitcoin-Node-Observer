@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 @Entity(tableName = "node")
 data class Node(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    @ColumnInfo(name = "ip") val ip: String,
+    @ColumnInfo(name = "host") val host: String,
     @ColumnInfo(name = "port") val port: Int,
     @ColumnInfo(name = "nodeStatus") val nodeStatus: NodeStatus? = null,
     @ColumnInfo(name = "lastSyncStatus") val lastSyncStatus: SyncStatus? = null,

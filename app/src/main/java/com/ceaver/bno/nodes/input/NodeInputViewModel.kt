@@ -20,9 +20,9 @@ class NodeInputViewModel : ViewModel() {
         return this
     }
 
-    fun onSaveClick(ip: String, port: Int) {
+    fun onSaveClick(host: String, port: Int) {
         status.postValue(NodeInputStatus.START_SAVE)
-        NodeRepository.saveNodeAsync(node.value!!.copy(ip = ip, port = port, nodeStatus = null), true) {
+        NodeRepository.saveNodeAsync(node.value!!.copy(host = host, port = port, nodeStatus = null), true) {
             status.postValue(NodeInputStatus.END_SAVE)
         }
     }
