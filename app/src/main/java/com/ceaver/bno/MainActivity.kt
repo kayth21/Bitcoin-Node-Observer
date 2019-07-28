@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.ceaver.bno.contribute.ContributeFragment
+import com.ceaver.bno.credits.CreditsFragment
+import com.ceaver.bno.donate.DonateFragment
+import com.ceaver.bno.feedback.FeedbackFragment
+import com.ceaver.bno.manual.ManualFragment
 import com.ceaver.bno.nodes.NodeEvents
 import kotlinx.android.synthetic.main.main_activity.*
 import org.greenrobot.eventbus.EventBus
@@ -24,13 +29,34 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.mainmenuReloadAction -> {
-            Workers.run()
-            true
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            R.id.mainmenuReloadAction -> {
+                Workers.run()
+                true
+            }
+            R.id.mainmenuFeedbackAction -> {
+                FeedbackFragment().show(supportFragmentManager, FeedbackFragment.FEEDBACK_FRAGMENT_TAG)
+                true
+            }
+            R.id.mainmenuContributeAction -> {
+                ContributeFragment().show(supportFragmentManager, ContributeFragment.CONTRIBUTE_FRAGMENT_TAG)
+                true
+            }
+            R.id.mainmenuManualAction -> {
+                ManualFragment().show(supportFragmentManager, ManualFragment.MANUAL_FRAGMENT_TAG)
+                true
+            }
+            R.id.mainmenuDonateAction -> {
+                DonateFragment().show(supportFragmentManager, DonateFragment.DONATE_FRAGMENT_TAG)
+                true
+            }
+            R.id.mainmenuCreditsAction -> {
+                CreditsFragment().show(supportFragmentManager, CreditsFragment.CREDITS_FRAGMENT_TAG)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        else -> super.onOptionsItemSelected(item)
-    }
 
     override fun onStart() {
         super.onStart()

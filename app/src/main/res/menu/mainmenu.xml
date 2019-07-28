@@ -1,8 +1,45 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
             android:id="@+id/mainmenuReloadAction"
             android:title="@string/reload"
             android:icon="@drawable/reload"
             app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/overflow"
+            android:icon="@drawable/overflow"
+            android:orderInCategory="201"
+            android:title="@string/overflow"
+            app:showAsAction="always">
+
+        <menu>
+            <item
+                    android:id="@+id/mainmenuManualAction"
+                    android:icon="@drawable/help"
+                    android:title="@string/manual"
+                    app:showAsAction="never"/>
+            <item
+                    android:id="@+id/mainmenuFeedbackAction"
+                    android:icon="@drawable/feedback"
+                    android:title="@string/feedback"
+                    app:showAsAction="never"/>
+            <item
+                    android:id="@+id/mainmenuContributeAction"
+                    android:icon="@drawable/contribute"
+                    android:title="@string/contribute"
+                    app:showAsAction="never"/>
+            <item
+                    android:id="@+id/mainmenuDonateAction"
+                    android:icon="@drawable/donate"
+                    android:title="@string/donate"
+                    app:showAsAction="never"/>
+            <item
+                    android:id="@+id/mainmenuCreditsAction"
+                    android:icon="@drawable/credits"
+                    android:title="@string/credits"
+                    app:showAsAction="never"/>
+        </menu>
+    </item>
 </menu>

@@ -47,4 +47,23 @@
     <string name="weekly_uptime_index">Weekly Uptime Index</string>
     <string name="monthly_latency_index">Monthly Latency Index</string>
     <string name="monthly_uptime_index">Monthly Uptime Index</string>
+    <string name="overflow">Overflow</string>
+    <string name="feedback">Feedback</string>
+    <string name="donate">Donate</string>
+    <string name="credits">Credits</string>
+    <string name="manual">How it works</string>
+    <string name="feedbackIntro">If you have any questions, feedback, improvements, bug reports or you are just looking for friends, feel free to get in touch with me:</string>
+    <string name="contribute">Contribute</string>
+    <string name="contributeIntro">Bitcoin Node Observer is an open source project, feel free to join and help improving this project. More information on Github.</string>
+    <string name="donation_address">bc1qqv97s06lrle7s2y203wp53s4r6f993w6f4vjul</string>
+    <string name="donation_Intro">Developing and maintaining an app is a lot of work. This app has no ads and will be available for free at any time. Any Bitcoin donation is highly appreciated. Thank you so much.</string>
+    <string name="credits_intro">This app uses images and services which are available for free, but should be mentioned somewhere. Here we do. Thanks for your great work.</string>
+    <string name="manual_intro">Bitcoin Node Observer let you observe any public reachable node.\n\nIt uses Bitnodes API to gather all the information. So at the moment there is no direct interaction with a Bitcoin node, but this is planned for a future release.\n\nIt works for IP and host addresses. Even Tor (.onion) hosts are possible to observe (at least some information).\n\nIf your node is not found, please check that your network is allowing incoming connections. More information here: https://bitcoin.org/en/full-node#network-configuration
+    </string>
+    <string name="contribute_github">Github: kayth1/NodeObserver</string>
+    <string name="credits_bitnodes">Bitnodes: https://bitnodes.earn.com</string>
+    <string name="credits_icons">Icons: https://www.deviantart.com/taytel/art/ORB-Icons-87934875</string>
+    <string name="twitter_kayth1234">Twitter: kayth1234</string>
+    <string name="e_mail_thomas_kayser_com">E-Mail: thomas@kayser.com</string>
+    <string name="telegram_kayth">Telegram: @kayth</string>
 </resources>
