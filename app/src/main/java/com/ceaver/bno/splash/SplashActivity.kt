@@ -2,8 +2,8 @@ package com.ceaver.bno.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.ceaver.bno.MainActivity
 import com.ceaver.bno.R
 import com.ceaver.bno.Workers

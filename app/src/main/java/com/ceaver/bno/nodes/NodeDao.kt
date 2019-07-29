@@ -1,6 +1,6 @@
 package com.ceaver.bno.nodes
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 @Dao
 interface NodeDao {

@@ -1,13 +1,13 @@
 package com.ceaver.bno.nodes.input
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.ceaver.bno.R
 import com.ceaver.bno.extensions.afterTextChanged
 import com.ceaver.bno.extensions.registerInputValidator

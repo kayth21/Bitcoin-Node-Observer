@@ -1,6 +1,6 @@
 package com.ceaver.bno.database
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import com.ceaver.bno.network.SyncStatus
 import com.ceaver.bno.nodes.NodeStatus
 import java.time.LocalDateTime

@@ -58,7 +58,8 @@
     <string name="donation_address">bc1qqv97s06lrle7s2y203wp53s4r6f993w6f4vjul</string>
     <string name="donation_Intro">Developing and maintaining an app is a lot of work. This app has no ads and will be available for free at any time. Any Bitcoin donation is highly appreciated. Thank you so much.</string>
     <string name="credits_intro">This app uses images and services which are available for free, but should be mentioned somewhere. Here we do. Thanks for your great work.</string>
-    <string name="manual_intro">Bitcoin Node Observer let you observe any public reachable node.\n\nIt uses Bitnodes API to gather all the information. So at the moment there is no direct interaction with a Bitcoin node, but this is planned for a future release.\n\nIt works for IP and host addresses. Even Tor (.onion) hosts are possible to observe (at least some information).\n\nIf your node is not found, please check that your network is allowing incoming connections. More information here: https://bitcoin.org/en/full-node#network-configuration
+    <string name="manual_intro">Bitcoin Node Observer let you observe any public reachable node.\n\nIt uses Bitnodes API to gather all the information. So at the moment there is no direct interaction with a Bitcoin node, but this is planned for a future release.\n\nIt works for IP and host addresses. Even Tor (.onion)
+        hosts are possible to observe (at least some information).\n\nIf your node is not found, please check that your network is allowing incoming connections. More information here: https://bitcoin.org/en/full-node#network-configuration
     </string>
     <string name="contribute_github">Github: kayth1/NodeObserver</string>
     <string name="credits_bitnodes">Bitnodes: https://bitnodes.earn.com</string>

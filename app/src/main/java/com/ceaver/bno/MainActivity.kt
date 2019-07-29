@@ -1,9 +1,9 @@
 package com.ceaver.bno
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.ceaver.bno.contribute.ContributeFragment
 import com.ceaver.bno.credits.CreditsFragment
 import com.ceaver.bno.donate.DonateFragment

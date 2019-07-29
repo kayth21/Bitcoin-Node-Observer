@@ -1,7 +1,7 @@
 package com.ceaver.bno.snapshots
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.ceaver.bno.common.SingleLiveEvent
 
 class SnapshotViewModel : ViewModel() {

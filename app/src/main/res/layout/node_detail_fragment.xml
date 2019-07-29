@@ -14,7 +14,7 @@
 
         <!-- TITEL -->
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nodeDetailFragmentTitleConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -46,16 +46,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentTitle"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- LAST SYNCHRONISATION -->
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nodeDetailFragmentSynchronisationConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <android.support.constraint.Guideline
+            <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/nodeDetailFragmentSynchronisationGuideline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,14 +143,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nodeDetailFragmentNodeDetailsConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <android.support.constraint.Guideline
+            <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/nodeDetailFragmentNodeDetailGuideline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -459,14 +459,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nodeDetailFragmentPeerIndexConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <android.support.constraint.Guideline
+            <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/nodeDetailFragmentPeerIndexGuideline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -793,7 +793,7 @@
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

@@ -1,12 +1,12 @@
 package com.ceaver.bno.nodes.list
 
-import android.support.v7.widget.RecyclerView
 import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.ceaver.bno.R
 import com.ceaver.bno.extensions.asFormattedNumber
 import com.ceaver.bno.extensions.setLocked

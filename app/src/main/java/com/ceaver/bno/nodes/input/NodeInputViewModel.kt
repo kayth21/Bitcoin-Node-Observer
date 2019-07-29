@@ -1,7 +1,7 @@
 package com.ceaver.bno.nodes.input
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.ceaver.bno.common.SingleLiveEvent
 import com.ceaver.bno.nodes.Node
 import com.ceaver.bno.nodes.NodeRepository
