@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.work.*
 import com.ceaver.bno.bitnodes.BitnodesRepository
 import com.ceaver.bno.nodes.NodeRepository
+import com.ceaver.bno.nodes.NodeStatus
+import com.ceaver.bno.notification.Notification
 import com.ceaver.bno.snapshots.SnapshotRepository
 import com.ceaver.bno.threading.BackgroundThreadExecutor
 import org.greenrobot.eventbus.EventBus
 
 private const val NODE_WORKER_NODE_ID = "com.ceaver.bno.Workers.nodeId"
+private const val UNIQUE_WORK_ID = "com.ceaver.bno.Workers.uniqueWorkId"
 
 object Workers {
 
@@ -19,7 +22,7 @@ object Workers {
     fun run(nodeId: Long?) {
         BackgroundThreadExecutor.execute {
             WorkManager.getInstance()
-                .beginWith(notifyStart())
+                .beginUniqueWork(UNIQUE_WORK_ID, ExistingWorkPolicy.APPEND, notifyStart())
                 .then(listOf(prepareNodes(nodeId), prepareSnapshot()))
                 .then(updateNodes(nodeId) + updateSnapshot())
                 .then(notifyEnd())
@@ -95,7 +98,14 @@ object Workers {
             val node = NodeRepository.loadNode(inputData.getLong(NODE_WORKER_NODE_ID, -1))
             val nodeInfoResponse = BitnodesRepository.lookupNode(node.host, node.port)
             val peerIndexResponse = BitnodesRepository.lookupPeerIndex(node.host, node.port)
-            NodeRepository.updateNode(node.copyFromBitnodesResponse(nodeInfoResponse, peerIndexResponse), true)
+            val updatedNode = node.copyFromBitnodesResponse(nodeInfoResponse, peerIndexResponse)
+            if (node.isUp() && updatedNode.isDown() || node.isDown() && updatedNode.isUp()) {
+                val title = "Bitcoin node is ${updatedNode.nodeStatus} ${"again".takeIf { updatedNode.nodeStatus == NodeStatus.UP }.orEmpty()}"
+                val text = updatedNode.host
+                val image = updatedNode.nodeStatus!!.image
+                Notification.notifyStatusChange(title, text, image)
+            }
+            NodeRepository.updateNode(updatedNode, true)
             return Result.success()
         }
     }

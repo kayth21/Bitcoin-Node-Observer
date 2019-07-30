@@ -35,7 +35,7 @@ class NodeInputFragment : DialogFragment() {
         observeDataReady(viewModel)
     }
 
-    private fun lookupNodeId(): Long? = arguments!!.getLong(NODE_ID).takeUnless { it == 0L }
+    private fun lookupNodeId(): Long? = arguments?.getLong(NODE_ID).takeUnless { it == 0L }
     private fun lookupViewModel(nodeId: Long?): NodeInputViewModel = ViewModelProviders.of(this).get(NodeInputViewModel::class.java).init(nodeId)
 
     private fun bindActions(viewModel: NodeInputViewModel) {

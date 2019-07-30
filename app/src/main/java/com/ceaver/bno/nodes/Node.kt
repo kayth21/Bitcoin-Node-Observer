@@ -114,4 +114,6 @@ data class Node(
             )
         }
     }
+    fun isUp(): Boolean = nodeStatus == NodeStatus.UP
+    fun isDown(): Boolean = nodeStatus == NodeStatus.DOWN
 }

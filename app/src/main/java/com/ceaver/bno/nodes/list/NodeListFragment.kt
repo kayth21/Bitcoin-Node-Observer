@@ -35,9 +35,7 @@ class NodeListFragment : Fragment() {
         nodeListFragmentNodeList.adapter = nodeListAdapter
         nodeListFragmentNodeList.addItemDecoration(DividerItemDecoration(activity!!.application, LinearLayoutManager.VERTICAL)) // TODO seriously?
         nodeListFragmentCreateNodeButton.setOnClickListener {
-            val nodeInputFragment = NodeInputFragment()
-            nodeInputFragment.arguments = Bundle()
-            nodeInputFragment.show(fragmentManager, NodeInputFragment.NODE_INPUT_FRAGMENT_TAG)
+            NodeInputFragment().show(fragmentManager!!, NodeInputFragment.NODE_INPUT_FRAGMENT_TAG)
         }
         loadAllNodes()
     }
@@ -88,8 +86,8 @@ class NodeListFragment : Fragment() {
         }
     }
 
-    override fun onContextItemSelected(menuItem: MenuItem?): Boolean {
-        if (menuItem!!.groupId == NodeListAdapter.CONTEXT_MENU_GROUP_ID) {
+    override fun onContextItemSelected(menuItem: MenuItem): Boolean {
+        if (menuItem.groupId == NodeListAdapter.CONTEXT_MENU_GROUP_ID) {
             val selectedNode = nodeListAdapter.currentLongClickNode!!
             when (menuItem.itemId) {
                 NodeListAdapter.CONTEXT_MENU_EDIT_ITEM_ID -> showDialogFragment(NodeInputFragment(), NodeInputFragment.NODE_INPUT_FRAGMENT_TAG, NodeInputFragment.NODE_ID, selectedNode.id)
@@ -104,6 +102,6 @@ class NodeListFragment : Fragment() {
         val arguments = Bundle();
         arguments.putLong(nodeIdKey, nodeIdValue)
         dialogFragment.arguments = arguments
-        dialogFragment.show(fragmentManager, fragmentTag)
+        dialogFragment.show(fragmentManager!!, fragmentTag)
     }
 }

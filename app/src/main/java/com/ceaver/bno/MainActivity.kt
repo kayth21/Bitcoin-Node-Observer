@@ -1,9 +1,11 @@
 package com.ceaver.bno
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.*
 import com.ceaver.bno.contribute.ContributeFragment
 import com.ceaver.bno.credits.CreditsFragment
 import com.ceaver.bno.donate.DonateFragment
@@ -14,7 +16,9 @@ import kotlinx.android.synthetic.main.main_activity.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.util.concurrent.TimeUnit
 
+const val BACKGROUND_PROCESS_ID = "com.ceaver.bno.MainActivity.periodicBackgroundProcessId"
 
 class MainActivity : AppCompatActivity() {
 
@@ -61,6 +65,16 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
+
+        val backgroundProcess = PeriodicWorkRequestBuilder<StartWorker>(15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES).build()
+        WorkManager.getInstance().enqueueUniquePeriodicWork(BACKGROUND_PROCESS_ID, ExistingPeriodicWorkPolicy.KEEP, backgroundProcess)
+    }
+
+    class StartWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
+        override fun doWork(): Result {
+            Workers.run()
+            return Result.success()
+        }
     }
 
     override fun onStop() {
