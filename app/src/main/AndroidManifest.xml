@@ -13,19 +13,27 @@
             android:roundIcon="@mipmap/bno_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         <activity
                 android:name=".splash.SplashActivity"
-                android:screenOrientation="portrait"
-                android:noHistory="true">
+                android:noHistory="true"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".MainActivity"
                 android:screenOrientation="portrait">
         </activity>
+
+        <activity
+                android:name=".preferences.PreferencesActivity"
+                android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import com.ceaver.bno.bitnodes.BitnodesRepository
 import com.ceaver.bno.nodes.NodeRepository
 import com.ceaver.bno.nodes.NodeStatus
 import com.ceaver.bno.notification.Notification
+import com.ceaver.bno.preferences.Preferences
 import com.ceaver.bno.snapshots.SnapshotRepository
 import com.ceaver.bno.threading.BackgroundThreadExecutor
 import org.greenrobot.eventbus.EventBus
@@ -99,7 +100,7 @@ object Workers {
             val nodeInfoResponse = BitnodesRepository.lookupNode(node.host, node.port)
             val peerIndexResponse = BitnodesRepository.lookupPeerIndex(node.host, node.port)
             val updatedNode = node.copyFromBitnodesResponse(nodeInfoResponse, peerIndexResponse)
-            if (node.isUp() && updatedNode.isDown() || node.isDown() && updatedNode.isUp()) {
+            if (Preferences.isNotifyOnNodeStatusChange() && (node.isUp() && updatedNode.isDown() || node.isDown() && updatedNode.isUp())) {
                 val title = "Bitcoin node is ${updatedNode.nodeStatus} ${"again".takeIf { updatedNode.nodeStatus == NodeStatus.UP }.orEmpty()}"
                 val text = updatedNode.host
                 val image = updatedNode.nodeStatus!!.image

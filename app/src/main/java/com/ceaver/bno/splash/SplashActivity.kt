@@ -9,6 +9,7 @@ import com.ceaver.bno.R
 import com.ceaver.bno.Workers
 import com.ceaver.bno.network.Network
 import com.ceaver.bno.network.SyncStatus
+import com.ceaver.bno.preferences.Preferences
 import com.ceaver.bno.snapshots.SnapshotEvents
 import com.ceaver.bno.snapshots.SnapshotRepository
 import com.ceaver.bno.system.SystemRepository
@@ -31,7 +32,12 @@ class SplashActivity : AppCompatActivity() {
         publishView()
 
         if (SystemRepository.isInitialized()) {
-            BackgroundThreadExecutor.execute { startMainActivity() }
+            BackgroundThreadExecutor.execute {
+                startMainActivity()
+                if (Preferences.isPreferencesSyncOnStartup())
+                    Workers.run()
+            }
+
         } else {
             bindActions()
             loadSnapshotData()

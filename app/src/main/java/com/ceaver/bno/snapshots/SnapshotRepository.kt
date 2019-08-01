@@ -2,9 +2,7 @@ package com.ceaver.bno.snapshots
 
 import android.content.Context
 import com.ceaver.bno.Application
-import com.ceaver.bno.extensions.getInt
-import com.ceaver.bno.extensions.getLong
-import com.ceaver.bno.extensions.getString
+import com.ceaver.bno.extensions.*
 import com.ceaver.bno.network.SyncStatus
 import org.greenrobot.eventbus.EventBus
 import java.time.LocalDateTime
@@ -22,11 +20,11 @@ object SnapshotRepository {
 
     fun update(snapshot: Snapshot) {
         Application.appContext!!.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE).edit()
-            .putInt(LATEST_BLOCK, snapshot.blockHeight ?: Int.MIN_VALUE)
-            .putInt(TOTAL_NODES, snapshot.totalNodes ?: Int.MIN_VALUE)
-            .putLong(SNAPSHOT_DATE, if (snapshot.snapshotDate == null) Long.MIN_VALUE else ChronoUnit.SECONDS.between(LocalDateTime.MIN, snapshot.snapshotDate))
+            .putInt(LATEST_BLOCK, snapshot.blockHeight)
+            .putInt(TOTAL_NODES, snapshot.totalNodes)
+            .putLong(SNAPSHOT_DATE, if (snapshot.snapshotDate == null) null else ChronoUnit.SECONDS.between(LocalDateTime.MIN, snapshot.snapshotDate))
             .putString(LAST_SYNC_STATUS, snapshot.lastSyncStatus?.name)
-            .putLong(LAST_SYNC_DATE, if (snapshot.lastSyncDate == null) Long.MIN_VALUE else ChronoUnit.SECONDS.between(LocalDateTime.MIN, snapshot.lastSyncDate))
+            .putLong(LAST_SYNC_DATE, if (snapshot.lastSyncDate == null) null else ChronoUnit.SECONDS.between(LocalDateTime.MIN, snapshot.lastSyncDate))
             .putString(ERROR_TEXT, snapshot.errorMessage)
             .apply()
         EventBus.getDefault().post(SnapshotEvents.Update())
