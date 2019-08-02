@@ -42,6 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentTitle"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentTitle"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -97,6 +98,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentLastSyncDateLabel"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentLastSyncDateLabel"/>
 
@@ -117,6 +119,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentLastSyncDateValue"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentLastSyncStatusLabel"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -139,6 +142,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentErrorTextLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -196,6 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentNodeStatusLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -216,6 +221,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
                     app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentNodeStatusValue"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -239,6 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentProtocolVersionLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -260,6 +267,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
                     app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentProtocolVersionValue"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -283,6 +291,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentConnectedSinceLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -303,6 +312,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
                     app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentConnectedSinceValue"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -326,6 +336,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentCityLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -346,6 +357,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
                     app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentCityValue"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -369,6 +381,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentTimezoneLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -389,6 +402,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentNodeDetailGuideline"
                     app:layout_constraintTop_toTopOf="@+id/nodeDetailFragmentTimezoneValue"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -411,6 +425,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentOrganisationNameLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -433,6 +448,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentHostnameLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -455,6 +471,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentServicesLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -510,6 +527,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentPeerIndexLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -531,6 +549,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentRankLabel"
                     app:layout_constraintStart_toStartOf="@+id/nodeDetailFragmentRankLabel"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -553,6 +572,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentProtocolVersionIndexLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -574,6 +594,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentServicesIndexLabel"
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -596,6 +617,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentHeightIndexLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -617,6 +639,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAsnIndexLabel"
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -639,6 +662,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentPortIndexLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -660,6 +684,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentNetworkSpeedIndexLabel"
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -682,6 +707,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAverageDailyLatencyIndexLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -703,6 +729,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentDailyUptimeIndexLabel"
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -725,6 +752,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAverageWeeklyLatencyIndexLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -746,6 +774,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentWeeklyUptimeIndexLabel"
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -768,6 +797,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentAverageMonthlyLatencyIndexLabel"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -789,6 +819,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textIsSelectable="true"
                     app:layout_constraintTop_toBottomOf="@+id/nodeDetailFragmentMonthlyUptimeIndexLabel"
                     app:layout_constraintStart_toStartOf="@id/nodeDetailFragmentPeerIndexGuideline"
                     app:layout_constraintEnd_toEndOf="parent"/>
