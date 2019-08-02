@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.ceaver.bno.MainActivity
 import com.ceaver.bno.R
 import com.ceaver.bno.Workers
@@ -32,13 +33,9 @@ class SplashActivity : AppCompatActivity() {
         publishView()
 
         if (SystemRepository.isInitialized()) {
-            BackgroundThreadExecutor.execute {
-                startMainActivity()
-                if (Preferences.isPreferencesSyncOnStartup())
-                    Workers.run()
-            }
-
+            BackgroundThreadExecutor.execute { startMainActivity() }
         } else {
+            initDefaultPreferences()
             bindActions()
             loadSnapshotData()
         }
@@ -51,6 +48,10 @@ class SplashActivity : AppCompatActivity() {
 
     private fun publishView() {
         setContentView(R.layout.splash_activity)
+    }
+
+    private fun initDefaultPreferences() {
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
     }
 
     private fun bindActions() {
@@ -73,6 +74,8 @@ class SplashActivity : AppCompatActivity() {
         Thread.sleep(1000);
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+        if (Preferences.isPreferencesSyncOnStartup())
+            Workers.run()
     }
 
     @Suppress("UNUSED_PARAMETER")

@@ -9,6 +9,7 @@ import com.ceaver.bno.contribute.ContributeFragment
 import com.ceaver.bno.credits.CreditsFragment
 import com.ceaver.bno.donate.DonateFragment
 import com.ceaver.bno.feedback.FeedbackFragment
+import com.ceaver.bno.logging.LogListActivity
 import com.ceaver.bno.manual.ManualFragment
 import com.ceaver.bno.nodes.NodeEvents
 import com.ceaver.bno.preferences.PreferencesActivity
@@ -58,6 +59,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.mainmenuCreditsAction -> {
                 CreditsFragment().show(supportFragmentManager, CreditsFragment.CREDITS_FRAGMENT_TAG)
+                true
+            }
+            R.id.mainmenuLoggingAction -> {
+                startActivity(Intent(this, LogListActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

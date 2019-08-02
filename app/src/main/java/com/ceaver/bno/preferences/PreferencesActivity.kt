@@ -10,7 +10,9 @@ import androidx.work.*
 import com.ceaver.bno.Application
 import com.ceaver.bno.R
 import com.ceaver.bno.Workers
+import com.ceaver.bno.extensions.getBoolean
 import com.ceaver.bno.extensions.getString
+import com.ceaver.bno.logging.LogRepository
 
 const val BACKGROUND_PROCESS_ID = "com.ceaver.bno.preferences.PreferencesActivity.periodicBackgroundProcessId"
 
@@ -24,7 +26,19 @@ class PreferencesActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefe
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            "preferencesSyncInBackground" -> onSyncInBackgroundChanged(BackgroundSyncInterval.valueOf(sharedPreferences!!.getString(key)!!))
+            "preferencesSyncOnStartup" -> {
+                val syncOnStartup = sharedPreferences!!.getBoolean(key)!!
+                LogRepository.insertLogAsync("Edit preferences: sync on startup: $syncOnStartup")
+            }
+            "preferencesNotifyOnStatusChange" -> {
+                val notifyOnStatusChange = sharedPreferences!!.getBoolean(key)!!
+                LogRepository.insertLogAsync("Edit preferences: notify on node status change: $notifyOnStatusChange")
+            }
+            "preferencesSyncInBackground" -> {
+                val backgroundSyncInterval = BackgroundSyncInterval.valueOf(sharedPreferences!!.getString(key)!!)
+                onSyncInBackgroundChanged(backgroundSyncInterval)
+                LogRepository.insertLogAsync("Edit preferences: sync in background: $backgroundSyncInterval")
+            }
         }
     }
 

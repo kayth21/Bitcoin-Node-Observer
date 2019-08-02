@@ -5,6 +5,7 @@ import com.ceaver.bno.network.SyncStatus
 import com.ceaver.bno.nodes.NodeStatus
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
+import java.util.*
 
 class Converters {
 
@@ -25,4 +26,10 @@ class Converters {
 
     @TypeConverter
     fun toSyncStatus(string: String?): SyncStatus? = string?.let { SyncStatus.valueOf(it) }
+
+    @TypeConverter
+    fun fromUuid(uuid: UUID?): String? = uuid?.toString()
+
+    @TypeConverter
+    fun toUuid(string: String?): UUID? = string?.let { UUID.fromString(string) }
 }

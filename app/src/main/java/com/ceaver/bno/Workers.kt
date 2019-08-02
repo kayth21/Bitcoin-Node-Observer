@@ -3,6 +3,7 @@ package com.ceaver.bno
 import android.content.Context
 import androidx.work.*
 import com.ceaver.bno.bitnodes.BitnodesRepository
+import com.ceaver.bno.logging.LogRepository
 import com.ceaver.bno.nodes.NodeRepository
 import com.ceaver.bno.nodes.NodeStatus
 import com.ceaver.bno.notification.Notification
@@ -10,6 +11,9 @@ import com.ceaver.bno.preferences.Preferences
 import com.ceaver.bno.snapshots.SnapshotRepository
 import com.ceaver.bno.threading.BackgroundThreadExecutor
 import org.greenrobot.eventbus.EventBus
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+import java.util.*
 
 private const val NODE_WORKER_NODE_ID = "com.ceaver.bno.Workers.nodeId"
 private const val UNIQUE_WORK_ID = "com.ceaver.bno.Workers.uniqueWorkId"
@@ -23,7 +27,7 @@ object Workers {
     fun run(nodeId: Long?) {
         BackgroundThreadExecutor.execute {
             WorkManager.getInstance()
-                .beginUniqueWork(UNIQUE_WORK_ID, ExistingWorkPolicy.APPEND, notifyStart())
+                .beginUniqueWork(UNIQUE_WORK_ID, ExistingWorkPolicy.REPLACE, notifyStart())
                 .then(listOf(prepareNodes(nodeId), prepareSnapshot()))
                 .then(updateNodes(nodeId) + updateSnapshot())
                 .then(notifyEnd())
@@ -80,8 +84,17 @@ object Workers {
 
     class SnapshotWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
         override fun doWork(): Result {
+            val uuid = UUID.randomUUID()
+            LogRepository.insertLog("Loading snapshot data...", uuid)
+
             val response = BitnodesRepository.lookupLatestSnapshot()
             SnapshotRepository.update(SnapshotRepository.load().copyFromBitnodesResponse(response))
+
+            val log = LogRepository.loadLog(uuid)
+            val duration = log.timestamp.until(LocalDateTime.now(), ChronoUnit.MILLIS)
+            val logResult = if (response.isSuccessful()) " success ($duration ms)" else " failed ($duration ms)\n${response.failureText()}"
+            LogRepository.updateLog(log.copy(message = log.message + logResult))
+
             return Result.success()
         }
     }
@@ -97,6 +110,8 @@ object Workers {
     class UpdateNodeWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
         override fun doWork(): Result {
             val node = NodeRepository.loadNode(inputData.getLong(NODE_WORKER_NODE_ID, -1))
+            val uuid = UUID.randomUUID()
+            LogRepository.insertLog("Loading ${node.host}:${node.port}...", uuid)
             val nodeInfoResponse = BitnodesRepository.lookupNode(node.host, node.port)
             val peerIndexResponse = BitnodesRepository.lookupPeerIndex(node.host, node.port)
             val updatedNode = node.copyFromBitnodesResponse(nodeInfoResponse, peerIndexResponse)
@@ -107,6 +122,10 @@ object Workers {
                 Notification.notifyStatusChange(title, text, image)
             }
             NodeRepository.updateNode(updatedNode, true)
+            val log = LogRepository.loadLog(uuid)
+            val duration = log.timestamp.until(LocalDateTime.now(), ChronoUnit.MILLIS)
+            val logResult = if (nodeInfoResponse.isSuccessful() && peerIndexResponse.isSuccessful()) " success ($duration ms)" else " failed ($duration ms)\n${updatedNode.errorMessage}"
+            LogRepository.updateLog(log.copy(message = log.message + logResult))
             return Result.success()
         }
     }

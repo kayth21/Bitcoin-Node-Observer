@@ -10,7 +10,7 @@ interface NodeDao {
     @Query("select * from node where id = :id")
     fun loadNode(id: Long): Node
 
-    @Insert(onConflict = OnConflictStrategy.FAIL)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertNode(node: Node) : Long
 
     @Update

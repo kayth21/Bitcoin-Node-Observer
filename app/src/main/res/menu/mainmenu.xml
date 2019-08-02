@@ -46,6 +46,11 @@
                     android:icon="@drawable/credits"
                     android:title="@string/credits"
                     app:showAsAction="never"/>
+            <item
+                    android:id="@+id/mainmenuLoggingAction"
+                    android:icon="@drawable/logging"
+                    android:title="@string/logging"
+                    app:showAsAction="never"/>
         </menu>
     </item>
 </menu>
