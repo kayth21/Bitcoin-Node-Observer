@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.ceaver.bno.contribute.ContributeFragment
 import com.ceaver.bno.credits.CreditsFragment
-import com.ceaver.bno.donate.DonateFragment
 import com.ceaver.bno.feedback.FeedbackFragment
 import com.ceaver.bno.logging.LogListActivity
 import com.ceaver.bno.manual.ManualFragment
@@ -51,10 +50,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.mainmenuManualAction -> {
                 ManualFragment().show(supportFragmentManager, ManualFragment.MANUAL_FRAGMENT_TAG)
-                true
-            }
-            R.id.mainmenuDonateAction -> {
-                DonateFragment().show(supportFragmentManager, DonateFragment.DONATE_FRAGMENT_TAG)
                 true
             }
             R.id.mainmenuCreditsAction -> {

@@ -49,21 +49,19 @@
     <string name="monthly_uptime_index">Monthly Uptime Index</string>
     <string name="overflow">Overflow</string>
     <string name="feedback">Feedback</string>
-    <string name="donate">Donate</string>
     <string name="credits">Credits</string>
     <string name="manual">How it works</string>
-    <string name="feedbackIntro">If you have any questions, feedback, improvements, bug reports or you are just looking for friends, feel free to get in touch with me:</string>
+    <string name="feedbackIntro">Do you have any questions, feedback, improvements, bug reports or you are just looking for friends? :) Please get in touch with me:</string>
     <string name="contribute">Contribute</string>
-    <string name="contributeIntro">Bitcoin Node Observer is an open source project, feel free to join and help improving this project. More information on Github.</string>
-    <string name="donation_address">bc1qqv97s06lrle7s2y203wp53s4r6f993w6f4vjul</string>
-    <string name="donation_Intro">Developing and maintaining an app is a lot of work. This app has no ads and will be available for free at any time. Any Bitcoin donation is highly appreciated. Thank you so much.</string>
+    <string name="contributeIntro">Bitcoin Node Observer has no adds and will be available for free at any time.\n\nGoogle doesn\'t allow it to publish a Bitcoin donation address because of their payment policy. :(\n\nBut this software is open source, feel free to join the project on Github or contact me and help
+        me improving this app in any other way. More information on Github:</string>
     <string name="credits_intro">This app uses images and services which are available for free, but should be mentioned somewhere. Here we do. Thanks for your great work.</string>
     <string name="manual_intro">Bitcoin Node Observer let you observe any public reachable node.\n\nIt uses Bitnodes API to gather all the information. So at the moment there is no direct interaction with a Bitcoin node, but this will be considered in a future release.\n\nIt works for IP and host addresses.
         Even Tor (.onion) hosts are possible to observe (at least some information).\n\nIf your node is not found, please check that your network is allowing incoming connections. More information here: https://bitcoin.org/en/full-node#network-configuration\n\nIn preferences you can activate background synchronisation.
         Android OS (or the modified version of your phones manufacturer) often prevent apps from doing background operations to save battery. Therefore it is strongly recommended to whitelist this app to get background synchronisation work properly.
         In the apps log view you can check if the synchronisation is working according your settings. Note, a small time divergence is wanted. It gives Android the opportunity to optimize or assembly work and this is healthy for your battery.
     </string>
-    <string name="contribute_github">Github: kayth1/NodeObserver</string>
+    <string name="contribute_github">https://github.com/kayth1/Bitcoin-Node-Observer</string>
     <string name="credits_bitnodes">Bitnodes: https://bitnodes.earn.com</string>
     <string name="credits_icons">Icons: https://www.deviantart.com/taytel/art/ORB-Icons-87934875</string>
     <string name="twitter_kayth1234">Twitter: kayth1234</string>

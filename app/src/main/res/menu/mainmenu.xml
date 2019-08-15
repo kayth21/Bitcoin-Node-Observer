@@ -37,11 +37,6 @@
                     android:title="@string/contribute"
                     app:showAsAction="never"/>
             <item
-                    android:id="@+id/mainmenuDonateAction"
-                    android:icon="@drawable/donate"
-                    android:title="@string/donate"
-                    app:showAsAction="never"/>
-            <item
                     android:id="@+id/mainmenuCreditsAction"
                     android:icon="@drawable/credits"
                     android:title="@string/credits"
