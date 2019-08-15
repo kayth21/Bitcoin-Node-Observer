@@ -83,14 +83,14 @@ object NodeRepository {
         }
     }
 
-    fun deleteNode(intention: Node) {
-        getNodeDao().deleteNode(intention)
+    fun deleteNode(node: Node) {
+        getNodeDao().deleteNode(node)
         getEventbus().post(NodeEvents.Delete())
     }
 
-    fun deleteNodeAsync(intention: Node) {
+    fun deleteNodeAsync(node: Node) {
         BackgroundThreadExecutor.execute {
-            deleteNode(intention)
+            deleteNode(node)
         }
     }
 

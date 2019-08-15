@@ -41,7 +41,7 @@ object Workers {
 
     class StartWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
         override fun doWork(): Result {
-            EventBus.getDefault().post(WorkerEvents.Start())
+            EventBus.getDefault().postSticky(WorkerEvents.Start())
             return Result.success()
         }
     }
@@ -136,7 +136,8 @@ object Workers {
 
     class EndWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
         override fun doWork(): Result {
-            EventBus.getDefault().post(WorkerEvents.End())
+            EventBus.getDefault().removeStickyEvent(WorkerEvents.Start::class.java)
+            EventBus.getDefault().postSticky(WorkerEvents.End())
             return Result.success()
         }
     }
