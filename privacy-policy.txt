@@ -1,0 +1,1 @@
+We don't store your data, period. We have nowhere to store it. We don't even have a server database to store it. But the app uses public API of OXT.me. We don't know what they store. Feel free to ask them.
